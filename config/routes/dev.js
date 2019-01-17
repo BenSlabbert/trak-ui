@@ -1,3 +1,3 @@
 module.exports = {
-  API_BASE: 'http://localhost:8081'
+  API_GRPC: 'localhost:50051'
 };

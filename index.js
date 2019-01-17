@@ -28,6 +28,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
 
+logger.info('Adding routes');
+require('./routes/route')(app);
+
 if (profile === 'production' || profile === 'staging') {
   // serve react app
   app.use(express.static('client/build'));
@@ -50,30 +53,3 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT);
 logger.info('Server running at: ' + PORT);
-
-
-let messages = require('./proto/proto/proto_pb');
-let services = require('./proto/proto/proto_grpc_pb');
-
-let grpc = require('grpc');
-
-function main() {
-
-  let client = new services.HelloServiceClient('localhost:50051',
-      grpc.credentials.createInsecure());
-  let request = new messages.HelloRequest();
-
-  request.setFirstname('fname');
-  request.setLastname('lname');
-
-  client.hello(request, function ( err, response ) {
-
-    if (err) {
-      console.warn(err);
-    } else {
-      console.log('Greeting:', response.getGreeting());
-    }
-  });
-}
-
-main();
