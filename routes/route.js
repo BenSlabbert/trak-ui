@@ -3,15 +3,37 @@ const logger = require('../logger/winston-mongodb');
 let messages = require('trak-gRPC/src/js/proto/proto_pb');
 let services = require('trak-gRPC/src/js/grpc/proto_grpc_pb');
 let grpc = require('grpc');
-let client = new services.HelloServiceClient(
+let latestClientService = new services.LatestServiceClient(
     require('../config/routes').API_GRPC,
     grpc.credentials.createInsecure()
 );
 
-function getPromise( client, request ) {
+let productClientService = new services.ProductServiceClient(
+    require('../config/routes').API_GRPC,
+    grpc.credentials.createInsecure()
+);
+
+function getLatestResponse( client, request ) {
 
   return new Promise(( resolve, reject ) => {
-    client.hello(request, function ( err, response ) {
+    client.latest(request, function ( err, response ) {
+
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(response);
+      }
+    });
+  }).catch(e => {
+    logger.error({ code: e.code, message: e.message });
+    return null;
+  });
+}
+
+function getProductResponse( client, request ) {
+
+  return new Promise(( resolve, reject ) => {
+    client.product(request, function ( err, response ) {
 
       if (err) {
         return reject(err);
@@ -27,20 +49,31 @@ function getPromise( client, request ) {
 
 module.exports = ( app ) => {
 
-  app.get('/grpc',
+  app.get('/api/latest',
       async ( req, res ) => {
 
-        let request = new messages.HelloRequest();
+        let resp = await getLatestResponse(latestClientService, new messages.Empty());
 
-        request.setFirstName('fname');
-        request.setLastName('lname');
-
-        let promise = await getPromise(client, request);
-
-        if (!promise) {
-          res.send({ error: 'error' });
+        if (!resp) {
+          res.status(400).send({ error: 'Error while retrieving latest products!' });
         } else {
-          res.send(promise.toObject());
+          res.send(resp.toObject());
+        }
+      });
+
+  app.get('/api/product/:productId',
+      async ( req, res ) => {
+
+        let productRequest = new messages.ProductRequest();
+
+        productRequest.setProductId(req.params.productId);
+
+        let resp = await getProductResponse(productClientService, productRequest);
+
+        if (!resp) {
+          res.status(400).send({ error: 'Error while retrieving latest products!' });
+        } else {
+          res.send(resp.toObject());
         }
       });
 };

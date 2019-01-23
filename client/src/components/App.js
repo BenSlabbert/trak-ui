@@ -1,108 +1,58 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import * as actions from "../actions";
+import Latest from "./Latest";
+import Product from "./Product";
 
 class App extends Component {
 
+  componentDidMount() {
+    this.props.fetchLatestProducts();
+  }
+
   render() {
-    return <div className='container'>
-      <nav>
-        <div className='nav-wrapper'>
-          <a href='/' className='brand-logo'>Trak</a>
-          <ul id='nav-mobile' className='right'>
-            <li><a href='/latest'>Latest</a></li>
-          </ul>
-        </div>
-      </nav>
 
-      <div className='row'>
+    const { history, match } = this.props;
 
-        <h5>Latest</h5>
-
-        <div className='row'>
-          <div className='col s3 m3 l3'>
-            <div className='card-panel grey lighten-5 z-depth-1'>
-              <div className='row valign-wrapper'>
-                <div className='col s6 m6 l6'>
-                  <img
-                      src='https://media.takealot.com/covers_tsins/55927403/55927403-1-pdpxl.jpg'
-                      alt=''
-                      className='circle responsive-img'
-                  />
-                </div>
-                <div className='col s6 m6 l6'>
-              <span className='black-text'>
-                This is a square image. Add the 'circle' class to it to make it appear circular.
-              </span>
-                </div>
-              </div>
-            </div>
+    return <BrowserRouter>
+      <div className='container'>
+        <nav>
+          <div className='nav-wrapper'>
+            <a href='/' className='brand-logo center'>Trak</a>
           </div>
+        </nav>
 
-          <div className='col s3 m3 l3'>
-            <div className='card-panel grey lighten-5 z-depth-1'>
-              <div className='row valign-wrapper'>
-                <div className='col s6 m6 l6'>
-                  <img
-                      src='https://media.takealot.com/covers_tsins/55927403/55927403-1-pdpxl.jpg'
-                      alt=''
-                      className='circle responsive-img'
-                  >
-                  </img>
-                </div>
-                <div className='col s6 m6 l6'>
-              <span className='black-text'>
-                This is a square image. Add the 'circle' class to it to make it appear circular.
-              </span>
-                </div>
-              </div>
-            </div>
-          </div>
+        <Route
+            exact
+            path='/'
+            component={Latest}
+        />
 
-          <div className='col s3 m3 l3'>
-            <div className='card-panel grey lighten-5 z-depth-1'>
-              <div className='row valign-wrapper'>
-                <div className='col s6 m6 l6'>
-                  <img
-                      src='https://media.takealot.com/covers_tsins/55927403/55927403-1-pdpxl.jpg'
-                      alt=''
-                      className='circle responsive-img'
-                  >
-                  </img>
-                </div>
-                <div className='col s6 m6 l6'>
-              <span className='black-text'>
-                This is a square image. Add the 'circle' class to it to make it appear circular.
-              </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className='col s3 m3 l3'>
-            <div className='card-panel grey lighten-5 z-depth-1'>
-              <div className='row valign-wrapper'>
-                <div className='col s6 m6 l6'>
-                  <img
-                      src='https://media.takealot.com/covers_tsins/55927403/55927403-1-pdpxl.jpg'
-                      alt=''
-                      className='circle responsive-img'
-                  >
-                  </img>
-                </div>
-                <div className='col s6 m6 l6'>
-              <span className='black-text'>
-                This is a square image. Add the 'circle' class to it to make it appear circular.
-              </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
+        <Route
+            exact
+            path='/product/:productId'
+            match={match}
+            history={history}
+            component={Product}
+        />
       </div>
-
-    </div>;
+    </BrowserRouter>;
   }
 }
 
-export default App;
+App.propTypes = {
+  fetchLatestProducts: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  err: PropTypes.object
+
+};
+
+function mapStateToProps( { error } ) {
+  return {
+    err: error
+  }
+}
+
+export default connect(mapStateToProps, actions)(App);

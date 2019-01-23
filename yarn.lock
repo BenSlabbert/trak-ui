@@ -4649,9 +4649,9 @@ tough-cookie@~2.4.3:
     psl "^1.1.24"
     punycode "^1.4.1"
 
-"trak-gRPC@git://github.com/BenSlabbert/trak-gRPC#1efbdf7bf37814f0e6e5d485e27b44e482199a4f":
+"trak-gRPC@git://github.com/BenSlabbert/trak-gRPC#45da1cdc8cc8dc98b9ffb08ce36212a45f5849c6":
   version "1.0.0"
-  resolved "git://github.com/BenSlabbert/trak-gRPC#1efbdf7bf37814f0e6e5d485e27b44e482199a4f"
+  resolved "git://github.com/BenSlabbert/trak-gRPC#45da1cdc8cc8dc98b9ffb08ce36212a45f5849c6"
   dependencies:
     google-protobuf "^3.6.1"
     grpc "^1.17.0"
