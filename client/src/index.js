@@ -1,4 +1,5 @@
 import './styles/index.css';
+import 'chart.js';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

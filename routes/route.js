@@ -13,6 +13,11 @@ let productClientService = new services.ProductServiceClient(
     grpc.credentials.createInsecure()
 );
 
+let searchClientService = new services.SearchServiceClient(
+    require('../config/routes').SEARCH_GRPC,
+    grpc.credentials.createInsecure()
+);
+
 function getLatestResponse( client, request ) {
 
   return new Promise(( resolve, reject ) => {
@@ -34,6 +39,23 @@ function getProductResponse( client, request ) {
 
   return new Promise(( resolve, reject ) => {
     client.product(request, function ( err, response ) {
+
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(response);
+      }
+    });
+  }).catch(e => {
+    logger.error({ code: e.code, message: e.message });
+    return null;
+  });
+}
+
+function getSearchResponse( client, request ) {
+
+  return new Promise(( resolve, reject ) => {
+    client.search(request, function ( err, response ) {
 
       if (err) {
         return reject(err);
@@ -75,5 +97,19 @@ module.exports = ( app ) => {
         } else {
           res.send(resp.toObject());
         }
+      });
+
+  app.get('/api/search',
+      async ( req, res ) => {
+
+        let productRequest = new messages.SearchRequest();
+        productRequest.setSearch(req.query.s);
+
+        let resp = await getSearchResponse(searchClientService, productRequest);
+
+        let message = resp.toObject();
+        console.log(message);
+
+        res.send(message);
       });
 };

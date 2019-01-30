@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import Latest from "./Latest";
 import Product from "./Product";
+import Search from "./Search";
 
 class App extends Component {
 
@@ -23,6 +24,8 @@ class App extends Component {
             <a href='/' className='brand-logo center'>Trak</a>
           </div>
         </nav>
+
+        <Search/>
 
         <Route
             exact

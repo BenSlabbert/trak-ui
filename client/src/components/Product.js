@@ -3,6 +3,9 @@ import { withRouter } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as actions from "../actions";
+import _ from 'lodash';
+
+let LineChart = require("react-chartjs").Line;
 
 class Product extends Component {
 
@@ -16,19 +19,17 @@ class Product extends Component {
 
     const { history, product } = this.props;
 
-    console.log(product);
-
     return <div>
 
       <div className='row'/>
 
-      {product && product.product ? <div className='row'>
-        <div className='row'>
+      {product && product.product ? <div>
+        <div className='row col s12 m12 l12'>
           <img
               src={product.product.imageUrl}
               alt='product image'
               className='responsive-img hoverable center-block'
-              style={{ width: '50%', height: '50%' }}
+              style={{ width: '200px', height: '200px' }}
               onClick={() => window.open(product.product.productUrl, "_blank")}
           />
         </div>
@@ -51,6 +52,19 @@ class Product extends Component {
             </tbody>
           </table>
         </div>
+
+        <div className='row col s12 m12 l12'>
+          <LineChart data={{
+            labels: product.stats.chartData.labelsList.slice(0, 5),
+            datasets: _.map(product.stats.chartData.dataSetsList.slice(0, 5), l => {
+              return {
+                data: l.dataList,
+                ...l
+              }
+            })
+          }} width="1300" height="300"/>
+        </div>
+
       </div> : null}
 
       <button
