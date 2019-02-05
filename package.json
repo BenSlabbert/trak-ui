@@ -4,6 +4,10 @@
   "private": true,
   "description": "Trak UI",
   "main": "index.js",
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
   "scripts": {
     "start": "node index.js",
     "server": "nodemon index.js",
