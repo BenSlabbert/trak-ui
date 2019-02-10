@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Link, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import Latest from "./Latest";
 import Product from "./Product";
 import Search from "./Search";
+import Brand from "./Brand";
+import Category from "./Category";
 
 class App extends Component {
 
@@ -21,11 +23,21 @@ class App extends Component {
       <div className='container'>
         <nav>
           <div className='nav-wrapper'>
-            <a href='/' className='brand-logo center'>Trak</a>
+            <div className='brand-logo left'>
+              <Link to='/'>
+                Trak
+              </Link>
+            </div>
+
+            <ul id="nav-mobile" className="right hide-on-med-and-down">
+              <li>
+                <Link className='right' to='/search'>
+                  Search
+                </Link>
+              </li>
+            </ul>
           </div>
         </nav>
-
-        <Search/>
 
         <Route
             exact
@@ -35,10 +47,33 @@ class App extends Component {
 
         <Route
             exact
+            path='/search'
+            history={history}
+            component={Search}
+        />
+
+        <Route
+            exact
             path='/product/:productId'
             match={match}
             history={history}
             component={Product}
+        />
+
+        <Route
+            exact
+            path='/brand/:brandId'
+            match={match}
+            history={history}
+            component={Brand}
+        />
+
+        <Route
+            exact
+            path='/category/:categoryId'
+            match={match}
+            history={history}
+            component={Category}
         />
       </div>
     </BrowserRouter>;
@@ -52,7 +87,7 @@ App.propTypes = {
 
 };
 
-function mapStateToProps( { error } ) {
+function mapStateToProps({ error }) {
   return {
     err: error
   }

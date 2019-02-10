@@ -6,10 +6,11 @@ import { SEARCH_FORM } from "../util/forms";
 import FORM_FIELDS from './searchFormFields';
 import TextInput from "./forms/TextInput";
 import _ from 'lodash';
+import { Link } from "react-router-dom";
 
 class Search extends Component {
 
-  renderFields( FORM_FIELDS ) {
+  renderFields(FORM_FIELDS) {
     return _.map(FORM_FIELDS, field => {
       return <Field className='input-field'
                     key={field.name}
@@ -24,7 +25,6 @@ class Search extends Component {
     const { searchForm, fetchSearch } = this.props;
 
     if (searchForm && searchForm.values && searchForm.values.search) {
-      console.log('searching...');
       fetchSearch(searchForm.values.search);
     }
 
@@ -32,15 +32,15 @@ class Search extends Component {
 
   render() {
 
-    const { handleSubmit, search } = this.props;
-
-    console.log('props', search);
+    const { handleSubmit, search, history } = this.props;
 
     return <div>
 
       <form onSubmit={handleSubmit(this.search.bind(this))}>
 
         <div className='row'>
+
+          <h5>Search Products</h5>
 
           <div className='col s9 m9 l9'>
             {this.renderFields(FORM_FIELDS)}
@@ -56,19 +56,31 @@ class Search extends Component {
           </div>
 
         </div>
+
+        <div>
+          {search && search.search ? <div>
+            {_.map(search.search.resultsList, l => <div key={l.id}>
+              <Link to={`/product/${l.id}`}>
+                {l.name}
+              </Link>
+            </div>)}
+          </div> : undefined}
+        </div>
       </form>
+
+      <button
+          onClick={() => history.goBack()}
+          className='btn'
+      >
+        back
+      </button>
     </div>
   }
 }
 
-function mapStateToProps( { error, form, search } ) {
+function mapStateToProps({ error, form, search }) {
 
   let searchForm = form[SEARCH_FORM];
-
-
-  // if (search && search.search && search.search.resultsList) {
-  //   console.log(search.search.resultsList)
-  // }
 
   return {
     err: error,

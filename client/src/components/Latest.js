@@ -43,4 +43,3 @@ function mapStateToProps( { error, data } ) {
 }
 
 export default connect(mapStateToProps, actions)(Latest);
-

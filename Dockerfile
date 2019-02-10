@@ -2,7 +2,7 @@ FROM node:11.9-alpine
 
 RUN apk update && apk upgrade && apk add --no-cache bash git openssh
 
-ARG NODE_ENV=production
+ARG NODE_ENV=docker
 ENV NODE_ENV $NODE_ENV
 
 ARG PORT=3000
