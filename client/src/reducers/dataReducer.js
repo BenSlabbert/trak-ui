@@ -1,6 +1,6 @@
-import { DATA_FETCH_LATEST_PRODUCTS, DATA_FETCH_PRODUCT } from "../actions/data/dataTypes";
+import { DATA_FETCH_BRAND, DATA_FETCH_LATEST_PRODUCTS, DATA_FETCH_PRODUCT } from "../actions/data/dataTypes";
 
-export default function ( state = null, action ) {
+export default function (state = null, action) {
 
   switch (action.type) {
 
@@ -9,6 +9,9 @@ export default function ( state = null, action ) {
 
     case DATA_FETCH_PRODUCT:
       return { product: action.payload };
+
+    case DATA_FETCH_BRAND:
+      return { brand: action.payload };
 
     default:
       return state;

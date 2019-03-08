@@ -20,27 +20,33 @@ class Search extends Component {
     });
   }
 
-  search() {
+  searchProduct() {
 
-    const { searchForm, fetchSearch } = this.props;
+    const { searchForm, fetchSearchProducts, fetchSearchBrands } = this.props;
 
     if (searchForm && searchForm.values && searchForm.values.search) {
-      fetchSearch(searchForm.values.search);
+      fetchSearchProducts(searchForm.values.search);
+      fetchSearchBrands(searchForm.values.search);
     }
-
   }
 
   render() {
 
-    const { handleSubmit, search, history } = this.props;
+    const { handleSubmit, search, history, isLoading } = this.props;
 
     return <div>
 
-      <form onSubmit={handleSubmit(this.search.bind(this))}>
+      <form onSubmit={handleSubmit(this.searchProduct.bind(this))}>
 
         <div className='row'>
 
-          <h5>Search Products</h5>
+          {isLoading ?
+              <div className="progress">
+                <div className="indeterminate"/>
+              </div>
+              : undefined}
+
+          <h5>Search</h5>
 
           <div className='col s9 m9 l9'>
             {this.renderFields(FORM_FIELDS)}
@@ -48,6 +54,7 @@ class Search extends Component {
 
           <div className='col s3 m3 l3'>
             <button
+                disabled={isLoading}
                 className='teal btn-flat right white-text'
                 type='submit'
             >
@@ -58,9 +65,21 @@ class Search extends Component {
         </div>
 
         <div>
-          {search && search.search ? <div>
-            {_.map(search.search.resultsList, l => <div key={l.id}>
+          {search && search.searchProducts ? <div>
+            <h6>Products</h6>
+            {_.map(search.searchProducts.resultsList, l => <div key={l.id} className='row'>
               <Link to={`/product/${l.id}`}>
+                {l.name}
+              </Link>
+            </div>)}
+          </div> : undefined}
+        </div>
+
+        <div>
+          {search && search.searchBrands ? <div>
+            <h6>Brands</h6>
+            {_.map(search.searchBrands.resultsList, l => <div key={l.id} className='row'>
+              <Link to={`/brand/${l.id}`}>
                 {l.name}
               </Link>
             </div>)}
@@ -83,9 +102,10 @@ function mapStateToProps({ error, form, search }) {
   let searchForm = form[SEARCH_FORM];
 
   return {
+    search,
     err: error,
-    searchForm: searchForm ? searchForm : null,
-    search
+    isLoading: search && search.isLoading,
+    searchForm: searchForm ? searchForm : null
   }
 }
 

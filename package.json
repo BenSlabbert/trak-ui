@@ -19,7 +19,7 @@
   "author": "https://github/BenSlabbert",
   "license": "ISC",
   "dependencies": {
-    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC#e0ed42cc77ac480c6c1b88a6eff485f5fbad32e3",
+    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC#69fb9b39955a1673342281ec25cc6664000b10e1",
     "aws-sdk": "^2.278.1",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",

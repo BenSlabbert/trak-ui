@@ -3,22 +3,32 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import _ from 'lodash';
+import LatestItem from "./LatestItem";
 
 class Brand extends Component {
 
   componentDidMount() {
-    const { match } = this.props;
+    const { match, fetchBrand } = this.props;
     let brandId = match.params.brandId;
-    console.log(brandId);
+    fetchBrand(brandId);
   }
 
   render() {
 
-    const { history } = this.props;
+    const { history, brand } = this.props;
+
+    console.log(brand);
 
     return <div>
 
-      <h3>Brand: some brand name</h3>
+      <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
+
+      <div className='row'>
+        {brand && brand.productsList ? _.map(brand.productsList, l =>
+            <LatestItem
+                key={l.productUrl} item={l}/>) : undefined}
+      </div>
 
       <button
           onClick={() => history.goBack()}
@@ -38,7 +48,7 @@ Brand.propTypes = {
 function mapStateToProps({ error, data }) {
   return {
     err: error,
-    product: data && data.product ? data.product : undefined
+    brand: data && data.brand ? data.brand : undefined
   }
 }
 

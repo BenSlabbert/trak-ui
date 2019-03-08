@@ -9,7 +9,7 @@ class Category extends Component {
   componentDidMount() {
     const { match } = this.props;
     let categoryId = match.params.categoryId;
-    console.log(categoryId);
+    console.log('categoryId', categoryId);
   }
 
   render() {
