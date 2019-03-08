@@ -1,4 +1,4 @@
-import { SEARCH_BRANDS, SEARCH_LOADING, SEARCH_PRODUCTS } from "../actions/search/searchTypes";
+import { SEARCH_BRANDS, SEARCH_CATEGORIES, SEARCH_LOADING, SEARCH_PRODUCTS } from "../actions/search/searchTypes";
 
 export default function (state = null, action) {
 
@@ -19,6 +19,14 @@ export default function (state = null, action) {
       }
 
       return { searchBrands: action.payload, ...state, isLoading: false };
+
+    case SEARCH_CATEGORIES:
+
+      if (state && state.searchCategories) {
+        state.searchCategories = action.payload;
+      }
+
+      return { searchCategories: action.payload, ...state, isLoading: false };
 
     case SEARCH_LOADING:
       return { isLoading: action.payload };

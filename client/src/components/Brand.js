@@ -18,8 +18,6 @@ class Brand extends Component {
 
     const { history, brand } = this.props;
 
-    console.log(brand);
-
     return <div>
 
       <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>

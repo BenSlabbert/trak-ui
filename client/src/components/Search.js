@@ -22,11 +22,17 @@ class Search extends Component {
 
   searchProduct() {
 
-    const { searchForm, fetchSearchProducts, fetchSearchBrands } = this.props;
+    const {
+      searchForm,
+      fetchSearchProducts,
+      fetchSearchBrands,
+      fetchSearchCategories
+    } = this.props;
 
     if (searchForm && searchForm.values && searchForm.values.search) {
       fetchSearchProducts(searchForm.values.search);
       fetchSearchBrands(searchForm.values.search);
+      fetchSearchCategories(searchForm.values.search);
     }
   }
 
@@ -64,26 +70,39 @@ class Search extends Component {
 
         </div>
 
-        <div>
-          {search && search.searchProducts ? <div>
-            <h6>Products</h6>
-            {_.map(search.searchProducts.resultsList, l => <div key={l.id} className='row'>
-              <Link to={`/product/${l.id}`}>
-                {l.name}
-              </Link>
-            </div>)}
-          </div> : undefined}
-        </div>
+        <div className='row'>
+          <div className='col 4s 4m 4l'>
+            {search && search.searchProducts ? <div>
+              <h6>Products</h6>
+              {_.map(search.searchProducts.resultsList, l => <div key={l.id}>
+                <Link to={`/product/${l.id}`}>
+                  {this.showName(l.name)}
+                </Link>
+              </div>)}
+            </div> : undefined}
+          </div>
 
-        <div>
-          {search && search.searchBrands ? <div>
-            <h6>Brands</h6>
-            {_.map(search.searchBrands.resultsList, l => <div key={l.id} className='row'>
-              <Link to={`/brand/${l.id}`}>
-                {l.name}
-              </Link>
-            </div>)}
-          </div> : undefined}
+          <div className='col 4s 4m 4l'>
+            {search && search.searchBrands ? <div>
+              <h6>Brands</h6>
+              {_.map(search.searchBrands.resultsList, l => <div key={l.id}>
+                <Link to={`/brand/${l.id}`}>
+                  {this.showName(l.name)}
+                </Link>
+              </div>)}
+            </div> : undefined}
+          </div>
+
+          <div className='col 4s 4m 4l'>
+            {search && search.searchCategories ? <div>
+              <h6>Categories</h6>
+              {_.map(search.searchCategories.resultsList, l => <div key={l.id}>
+                <Link to={`/category/${l.id}`}>
+                  {this.showName(l.name)}
+                </Link>
+              </div>)}
+            </div> : undefined}
+          </div>
         </div>
       </form>
 
@@ -94,6 +113,10 @@ class Search extends Component {
         back
       </button>
     </div>
+  }
+
+  showName(name) {
+    return name.length > 60 ? name.substring(0, 60) + '...' : name;
   }
 }
 

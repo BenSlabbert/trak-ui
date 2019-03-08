@@ -3,22 +3,31 @@ import { connect } from "react-redux";
 import * as actions from "../actions";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
+import _ from 'lodash';
+import LatestItem from "./LatestItem";
 
 class Category extends Component {
 
   componentDidMount() {
-    const { match } = this.props;
+    const { match, fetchCategory } = this.props;
     let categoryId = match.params.categoryId;
     console.log('categoryId', categoryId);
+    fetchCategory(categoryId);
   }
 
   render() {
 
-    const { history } = this.props;
+    const { history, category } = this.props;
 
     return <div>
 
-      <h3>Category: some category name</h3>
+      <h3>Category: {category && category.name ? category.name : undefined}</h3>
+
+      <div className='row'>
+        {category && category.productsList ? _.map(category.productsList, l =>
+            <LatestItem
+                key={l.productUrl} item={l}/>) : undefined}
+      </div>
 
       <button
           onClick={() => history.goBack()}
@@ -38,7 +47,7 @@ Category.propTypes = {
 function mapStateToProps({ error, data }) {
   return {
     err: error,
-    product: data && data.product ? data.product : undefined
+    category: data && data.category ? data.category : undefined
   }
 }
 

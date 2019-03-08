@@ -19,6 +19,11 @@ let brandClientService = new services.BrandServiceClient(
     grpc.credentials.createInsecure()
 );
 
+let categoryClientService = new services.CategoryServiceClient(
+    require('../config/routes').API_GRPC,
+    grpc.credentials.createInsecure()
+);
+
 let searchClientService = new services.SearchServiceClient(
     require('../config/routes').SEARCH_GRPC,
     grpc.credentials.createInsecure()
@@ -62,6 +67,23 @@ function getBrandResponse(client, request) {
 
   return new Promise((resolve, reject) => {
     client.brand(request, function (err, response) {
+
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(response);
+      }
+    });
+  }).catch(e => {
+    logger.error({ code: e.code, message: e.message });
+    return null;
+  });
+}
+
+function getCategoryResponse(client, request) {
+
+  return new Promise((resolve, reject) => {
+    client.category(request, function (err, response) {
 
       if (err) {
         return reject(err);
@@ -212,6 +234,22 @@ module.exports = (app) => {
 
         if (!resp) {
           res.status(400).send({ error: 'Error while retrieving brand!' });
+        } else {
+          res.send(resp.toObject());
+        }
+      });
+
+  app.get('/api/category/:categoryId',
+      async (req, res) => {
+
+        let categoryRequest = new messages.CategoryRequest();
+
+        categoryRequest.setCategoryId(req.params.categoryId);
+
+        let resp = await getCategoryResponse(categoryClientService, categoryRequest);
+
+        if (!resp) {
+          res.status(400).send({ error: 'Error while retrieving category!' });
         } else {
           res.send(resp.toObject());
         }
