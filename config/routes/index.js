@@ -1,7 +1,10 @@
+const logger = require('../../logger/winston-mongodb');
 const profile = process.env.NODE_ENV;
 
-if (!profile || profile === 'dev' || profile === 'docker') {
+logger.info(`Loading routes for profile: ${profile}`);
+
+if (!profile || profile === 'dev') {
   module.exports = require('./dev');
 } else {
-  throw Error(`Unexpected profile: ${profile}`)
+  module.exports = require('./docker');
 }

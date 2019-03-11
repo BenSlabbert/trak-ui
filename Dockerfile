@@ -1,4 +1,4 @@
-FROM node:11.9-alpine
+FROM node:10.15-alpine
 
 RUN apk update && apk upgrade && apk add --no-cache bash git openssh
 
@@ -8,9 +8,7 @@ ENV NODE_ENV $NODE_ENV
 ARG PORT=3000
 ENV PORT $PORT
 
-RUN npm i npm@latest -g
-
-RUN apk add yarn
+RUN npm i npm@6.9.0 -g && npm i node-pre-gyp -g && apk --no-cache add yarn
 
 # Create app directory
 WORKDIR /usr/src/app
