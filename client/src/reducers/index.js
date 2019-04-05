@@ -4,10 +4,12 @@ import { reducer as reduxForm } from 'redux-form';
 import errorReducer from './errorReducer';
 import dataReducer from './dataReducer';
 import searchReducer from './searchReducer';
+import addReducer from './addReducer';
 
 export default combineReducers({
   error: errorReducer,
   data: dataReducer,
   search: searchReducer,
-  form: reduxForm
+  form: reduxForm,
+  add: addReducer
 });

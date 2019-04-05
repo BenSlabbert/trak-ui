@@ -254,4 +254,14 @@ module.exports = (app) => {
           res.send(resp.toObject());
         }
       });
-};
+
+      // Added by Sam
+      app.post('/api/add/:productId',
+        async (req, res) => {
+          // get takealot PLID 
+          // let plid = req.params.productId;
+
+        });
+      };
+
+
