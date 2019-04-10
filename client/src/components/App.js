@@ -8,7 +8,7 @@ import Product from "./Product";
 import Search from "./Search";
 import Brand from "./Brand";
 import Category from "./Category";
-import Add from "./Add";
+import AddProductForm from "./AddProductForm";
 
 
 class App extends Component {
@@ -87,7 +87,7 @@ class App extends Component {
             exact
             path='/add'
             history={history}
-            component={Add}
+            component={AddProductForm}
         />
       </div>
     </BrowserRouter>;

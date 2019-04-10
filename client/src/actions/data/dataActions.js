@@ -77,17 +77,16 @@ export const fetchCategory = (categoryId = null) => async dispatch => {
 };
 
 export const addProduct = (productId = null) => async dispatch => {
-
+  if (!productId) throw Error('missing productId!');
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
-  if (!productId) throw Error('missing productId!');
-
   try {
-    const res = await axios.post(`/api/product/${productId}`);
-    dispatch({ type: DATA_ADD_PRODUCT, payload: res.data });
+      const res = await axios.post(`/api/add/`);
+      dispatch({ type: DATA_ADD_PRODUCT, payload: res.data });
+      
+      
   } catch (e) {
-    dispatch(dataLoadingStop());
-    apiActionExceptionHandler(e, dispatch);
+      
   }
-};
+}

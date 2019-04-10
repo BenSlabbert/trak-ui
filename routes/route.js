@@ -255,13 +255,10 @@ module.exports = (app) => {
         }
       });
 
-      // Added by Sam
-      app.post('/api/add/:productId',
-        async (req, res) => {
-          // get takealot PLID 
-          // let plid = req.params.productId;
+  app.post('/api/add/',
+    async (req, res) => {
 
-        });
-      };
+    });
+};
 
 

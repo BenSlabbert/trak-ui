@@ -6,9 +6,8 @@ import { ADD_FORM } from "../util/forms";
 import FORM_FIELDS from './addFormFields';
 import TextInput from "./forms/TextInput";
 import _ from 'lodash';
-import { Link } from "react-router-dom";
 
-class Add extends Component {
+class AddProductForm extends Component {
 
   renderFields(FORM_FIELDS) {
     return _.map(FORM_FIELDS, field => {
@@ -29,7 +28,6 @@ class Add extends Component {
 
     if (addForm && addForm.values && addForm.values.add) {
       addProduct(addForm.values.add);
-      // console.log('got here')
     }
   }
 
@@ -92,4 +90,4 @@ function mapStateToProps({ error, form, add }) {
 
 export default connect(mapStateToProps, actions)(reduxForm({
   form: ADD_FORM
-})(Add));
+})(AddProductForm));
