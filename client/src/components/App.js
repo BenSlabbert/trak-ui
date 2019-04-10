@@ -8,6 +8,8 @@ import Product from "./Product";
 import Search from "./Search";
 import Brand from "./Brand";
 import Category from "./Category";
+import AddProductForm from "./AddProductForm";
+
 
 class App extends Component {
 
@@ -33,6 +35,11 @@ class App extends Component {
               <li>
                 <Link className='right' to='/search'>
                   Search
+                </Link>
+              </li>
+              <li>
+                <Link className='right' to='/add'>
+                  Add Product
                 </Link>
               </li>
             </ul>
@@ -74,6 +81,13 @@ class App extends Component {
             match={match}
             history={history}
             component={Category}
+        />
+
+        <Route
+            exact
+            path='/add'
+            history={history}
+            component={AddProductForm}
         />
       </div>
     </BrowserRouter>;

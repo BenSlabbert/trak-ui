@@ -6,7 +6,8 @@ import {
   DATA_FETCH_CATEGORY,
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
-  DATA_LOADING
+  DATA_LOADING,
+  DATA_ADD_PRODUCT
 } from './dataTypes';
 
 export const dataLoadingStop = () => {
@@ -74,3 +75,18 @@ export const fetchCategory = (categoryId = null) => async dispatch => {
     apiActionExceptionHandler(e, dispatch);
   }
 };
+
+export const addProduct = (productId = null) => async dispatch => {
+  if (!productId) throw Error('missing productId!');
+  dispatch(clearAllErrors());
+  dispatch({ type: DATA_LOADING, payload: true });
+
+  try {
+      const res = await axios.post(`/api/add/`);
+      dispatch({ type: DATA_ADD_PRODUCT, payload: res.data });
+      
+      
+  } catch (e) {
+      
+  }
+}

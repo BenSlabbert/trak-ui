@@ -2,7 +2,9 @@ import {
   DATA_FETCH_BRAND,
   DATA_FETCH_CATEGORY,
   DATA_FETCH_LATEST_PRODUCTS,
-  DATA_FETCH_PRODUCT
+  DATA_FETCH_PRODUCT,
+  DATA_LOADING,
+  DATA_ADD_PRODUCT
 } from "../actions/data/dataTypes";
 
 export default function (state = null, action) {
@@ -19,6 +21,12 @@ export default function (state = null, action) {
       return { brand: action.payload };
 
     case DATA_FETCH_CATEGORY:
+      return { category: action.payload };
+
+    case DATA_LOADING:
+      return { category: action.payload };
+
+      case DATA_ADD_PRODUCT:
       return { category: action.payload };
 
     default:
