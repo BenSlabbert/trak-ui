@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import _ from 'lodash';
+import React, { Component } from "react";
+import _ from "lodash";
 import LatestItem from "./LatestItem";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -21,8 +21,8 @@ class Latest extends Component {
 
       <div className='row'>
         {data && data.latest && data.latest.productsList ? _.map(data.latest.productsList, l =>
-            <LatestItem
-                key={l.productUrl} item={l}/>) : undefined}
+          <LatestItem
+            key={l.productUrl} item={l}/>) : undefined}
       </div>
     </div>;
   }
@@ -35,11 +35,11 @@ Latest.propTypes = {
 
 };
 
-function mapStateToProps( { error, data } ) {
+function mapStateToProps({ error, data }) {
   return {
     err: error,
     data
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(Latest);

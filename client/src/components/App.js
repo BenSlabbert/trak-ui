@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -40,40 +40,40 @@ class App extends Component {
         </nav>
 
         <Route
-            exact
-            path='/'
-            component={Latest}
+          exact
+          path='/'
+          component={Latest}
         />
 
         <Route
-            exact
-            path='/search'
-            history={history}
-            component={Search}
+          exact
+          path='/search'
+          history={history}
+          component={Search}
         />
 
         <Route
-            exact
-            path='/product/:productId'
-            match={match}
-            history={history}
-            component={Product}
+          exact
+          path='/product/:productId'
+          match={match}
+          history={history}
+          component={Product}
         />
 
         <Route
-            exact
-            path='/brand/:brandId'
-            match={match}
-            history={history}
-            component={Brand}
+          exact
+          path='/brand/:brandId'
+          match={match}
+          history={history}
+          component={Brand}
         />
 
         <Route
-            exact
-            path='/category/:categoryId'
-            match={match}
-            history={history}
-            component={Category}
+          exact
+          path='/category/:categoryId'
+          match={match}
+          history={history}
+          component={Category}
         />
       </div>
     </BrowserRouter>;
@@ -90,7 +90,7 @@ App.propTypes = {
 function mapStateToProps({ error }) {
   return {
     err: error
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(App);

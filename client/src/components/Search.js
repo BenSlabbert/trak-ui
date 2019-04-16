@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
 import * as actions from "../actions";
 import { SEARCH_FORM } from "../util/forms";
-import FORM_FIELDS from './searchFormFields';
+import FORM_FIELDS from "./searchFormFields";
 import TextInput from "./forms/TextInput";
-import _ from 'lodash';
+import _ from "lodash";
 import { Link } from "react-router-dom";
 
 class Search extends Component {
@@ -47,10 +47,10 @@ class Search extends Component {
         <div className='row'>
 
           {isLoading ?
-              <div className="progress">
-                <div className="indeterminate"/>
-              </div>
-              : undefined}
+            <div className="progress">
+              <div className="indeterminate"/>
+            </div>
+            : undefined}
 
           <h5>Search</h5>
 
@@ -60,9 +60,9 @@ class Search extends Component {
 
           <div className='col s3 m3 l3'>
             <button
-                disabled={isLoading}
-                className='teal btn-flat right white-text'
-                type='submit'
+              disabled={isLoading}
+              className='teal btn-flat right white-text'
+              type='submit'
             >
               search
             </button>
@@ -107,16 +107,16 @@ class Search extends Component {
       </form>
 
       <button
-          onClick={() => history.goBack()}
-          className='btn'
+        onClick={() => history.goBack()}
+        className='btn'
       >
         back
       </button>
-    </div>
+    </div>;
   }
 
   showName(name) {
-    return name.length > 60 ? name.substring(0, 60) + '...' : name;
+    return name.length > 60 ? name.substring(0, 60) + "..." : name;
   }
 }
 
@@ -129,7 +129,7 @@ function mapStateToProps({ error, form, search }) {
     err: error,
     isLoading: search && search.isLoading,
     searchForm: searchForm ? searchForm : null
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(reduxForm({

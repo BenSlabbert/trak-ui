@@ -1,6 +1,6 @@
-import { AUTH_ERROR, CLIENT_ERROR, SERVER_ERROR } from '../actions/error/errorTypes';
+import { AUTH_ERROR, CLIENT_ERROR, SERVER_ERROR } from "../actions/error/errorTypes";
 
-export const apiActionExceptionHandler = ( e, dispatch = null ) => {
+export const apiActionExceptionHandler = (e, dispatch = null) => {
   let resp1;
   let resp2;
 

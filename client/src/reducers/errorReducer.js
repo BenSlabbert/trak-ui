@@ -1,6 +1,6 @@
-import { AUTH_ERROR, CLEAR_ERRORS, CLIENT_ERROR, REPORT_APP_ERROR, SERVER_ERROR } from '../actions/error/errorTypes';
+import { AUTH_ERROR, CLEAR_ERRORS, CLIENT_ERROR, REPORT_APP_ERROR, SERVER_ERROR } from "../actions/error/errorTypes";
 
-export default function ( state = null, action ) {
+export default function(state = null, action) {
 
   switch (action.type) {
 

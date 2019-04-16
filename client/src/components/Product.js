@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as actions from "../actions";
-import _ from 'lodash';
+import _ from "lodash";
 
 let LineChart = require("react-chartjs").Line;
 
@@ -34,11 +34,11 @@ class Product extends Component {
 
           <div className='col s8 m8 l8'>
             <img
-                src={product.product.imageUrl}
-                alt='product image'
-                className='responsive-img hoverable center-block center center-align'
-                style={{ width: '200px', height: '200px' }}
-                onClick={() => window.open(product.product.productUrl, "_blank")}
+              src={product.product.imageUrl}
+              alt='product image'
+              className='responsive-img hoverable center-block center center-align'
+              style={{ width: "200px", height: "200px" }}
+              onClick={() => window.open(product.product.productUrl, "_blank")}
             />
           </div>
 
@@ -97,7 +97,7 @@ class Product extends Component {
               return {
                 data: l.dataList,
                 ...l
-              }
+              };
             })
           }} width="1300" height="300"/>
         </div>
@@ -105,8 +105,8 @@ class Product extends Component {
       </div> : null}
 
       <button
-          onClick={() => history.goBack()}
-          className='btn'
+        onClick={() => history.goBack()}
+        className='btn'
       >
         back
       </button>
@@ -127,7 +127,7 @@ function mapStateToProps({ error, data }) {
   return {
     err: error,
     product: data && data.product ? data.product : undefined
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(Product));

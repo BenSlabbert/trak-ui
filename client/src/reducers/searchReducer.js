@@ -1,6 +1,6 @@
 import { SEARCH_BRANDS, SEARCH_CATEGORIES, SEARCH_LOADING, SEARCH_PRODUCTS } from "../actions/search/searchTypes";
 
-export default function (state = null, action) {
+export default function(state = null, action) {
 
   switch (action.type) {
 

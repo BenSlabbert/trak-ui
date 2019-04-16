@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default ( { item = null } ) => {
+export default ({ item = null }) => {
 
   if (!item) return null;
 
@@ -10,11 +10,11 @@ export default ( { item = null } ) => {
 
       <div>
         <img
-            src={item.imageUrl}
-            alt='product image'
-            className='responsive-img hoverable center-block'
-            style={{ width: '50%', height: '50%' }}
-            onClick={() => window.open(item.productUrl, "_blank")}
+          src={item.imageUrl}
+          alt='product image'
+          className='responsive-img hoverable center-block'
+          style={{ width: "50%", height: "50%" }}
+          onClick={() => window.open(item.productUrl, "_blank")}
         />
       </div>
       <div>
@@ -34,5 +34,5 @@ export default ( { item = null } ) => {
         </table>
       </div>
     </div>
-  </div>
+  </div>;
 }

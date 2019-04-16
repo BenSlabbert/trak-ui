@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { connect } from "react-redux";
+import * as actions from "../actions";
 
 class ErrorBoundary extends Component {
 
   state = { hasError: false };
 
-  componentDidCatch( error, info ) {
+  componentDidCatch(error, info) {
     this.setState({ hasError: true });
     this.props.reportError({ error, info });
   }
@@ -27,7 +27,7 @@ class ErrorBoundary extends Component {
 
           <h6>We ran into an error!</h6>
 
-          <button className='btn' onClick={() => window.location = '/hex'}>
+          <button className='btn' onClick={() => window.location = "/hex"}>
             Take me Home
           </button>
         </div>
@@ -45,10 +45,10 @@ ErrorBoundary.propTypes = {
 
 };
 
-function mapStateToProps( { error } ) {
+function mapStateToProps({ error }) {
   return {
     err: error
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(ErrorBoundary);

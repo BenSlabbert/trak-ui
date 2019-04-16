@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import _ from 'lodash';
+import _ from "lodash";
 import LatestItem from "./LatestItem";
 
 class Brand extends Component {
@@ -24,17 +24,17 @@ class Brand extends Component {
 
       <div className='row'>
         {brand && brand.productsList ? _.map(brand.productsList, l =>
-            <LatestItem
-                key={l.productUrl} item={l}/>) : undefined}
+          <LatestItem
+            key={l.productUrl} item={l}/>) : undefined}
       </div>
 
       <button
-          onClick={() => history.goBack()}
-          className='btn'
+        onClick={() => history.goBack()}
+        className='btn'
       >
         back
       </button>
-    </div>
+    </div>;
   }
 }
 
@@ -47,7 +47,7 @@ function mapStateToProps({ error, data }) {
   return {
     err: error,
     brand: data && data.brand ? data.brand : undefined
-  }
+  };
 }
 
 export default connect(mapStateToProps, actions)(withRouter(Brand));
