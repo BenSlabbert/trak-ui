@@ -282,6 +282,8 @@ module.exports = (app) => {
 
         let promotionRequest = new messages.PromotionRequest();
 
+        // todo implement ui
+
         // promotionRequest.setSaleDeal(true);
         promotionRequest.setDailyDeal(true);
 
