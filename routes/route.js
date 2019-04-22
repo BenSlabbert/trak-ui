@@ -24,6 +24,11 @@ let categoryClientService = new services.CategoryServiceClient(
     grpc.credentials.createInsecure()
 );
 
+let promotionClientService = new services.PromotionServiceClient(
+    require('../config/routes').API_GRPC,
+    grpc.credentials.createInsecure()
+);
+
 let searchClientService = new services.SearchServiceClient(
     require('../config/routes').SEARCH_GRPC,
     grpc.credentials.createInsecure()
@@ -41,7 +46,7 @@ function getLatestResponse(client, request) {
       }
     });
   }).catch(e => {
-    logger.error({ code: e.code, message: e.message });
+    logger.error({ code: e.code, message: e.message, details: e.details });
     return null;
   });
 }
@@ -58,7 +63,7 @@ function getProductResponse(client, request) {
       }
     });
   }).catch(e => {
-    logger.error({ code: e.code, message: e.message });
+    logger.error({ code: e.code, message: e.message, details: e.details });
     return null;
   });
 }
@@ -75,7 +80,7 @@ function getBrandResponse(client, request) {
       }
     });
   }).catch(e => {
-    logger.error({ code: e.code, message: e.message });
+    logger.error({ code: e.code, message: e.message, details: e.details });
     return null;
   });
 }
@@ -92,7 +97,24 @@ function getCategoryResponse(client, request) {
       }
     });
   }).catch(e => {
-    logger.error({ code: e.code, message: e.message });
+    logger.error({ code: e.code, message: e.message, details: e.details });
+    return null;
+  });
+}
+
+function getPromotionResponse(client, request) {
+
+  return new Promise((resolve, reject) => {
+    client.promotions(request, function (err, response) {
+
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(response);
+      }
+    });
+  }).catch(e => {
+    logger.error({ code: e.code, message: e.message, details: e.details });
     return null;
   });
 }
@@ -250,6 +272,23 @@ module.exports = (app) => {
 
         if (!resp) {
           res.status(400).send({ error: 'Error while retrieving category!' });
+        } else {
+          res.send(resp.toObject());
+        }
+      });
+
+  app.get('/api/promotion',
+      async (req, res) => {
+
+        let promotionRequest = new messages.PromotionRequest();
+
+        // promotionRequest.setSaleDeal(true);
+        promotionRequest.setDailyDeal(true);
+
+        let resp = await getPromotionResponse(promotionClientService, promotionRequest);
+
+        if (!resp) {
+          res.status(400).send({ error: 'Error while retrieving promotion!' });
         } else {
           res.send(resp.toObject());
         }
