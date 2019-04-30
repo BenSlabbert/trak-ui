@@ -2,4 +2,4 @@
 
 yarn --cwd client build
 
-docker build -t benjaminslabbert/trak_ui:1.0.0 .
+docker build -t benjaminslabbert/trak_ui:1.0.2 .

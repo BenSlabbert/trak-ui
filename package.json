@@ -1,6 +1,6 @@
 {
   "name": "trak-ui",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": true,
   "description": "Trak UI",
   "main": "index.js",
@@ -46,7 +46,7 @@
     "path-parser": "^4.2.0",
     "prop-types": "^15.6.2",
     "sync-exec": "^0.6.2",
-    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC#a4f56add976caaa0e114d421c97aeb7d67124b6f",
+    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC#66aed715be699d8b86ec5982928ced32b23270bc",
     "uuid": "^3.3.2",
     "winston": "^2.4.3",
     "winston-mongodb": "^3.0.2"
