@@ -10,7 +10,6 @@ class Category extends Component {
   componentDidMount() {
     const { match, fetchCategory } = this.props;
     let categoryId = match.params.categoryId;
-    console.log("categoryId", categoryId);
     fetchCategory(categoryId);
   }
 

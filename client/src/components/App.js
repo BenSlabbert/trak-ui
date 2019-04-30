@@ -6,6 +6,7 @@ import * as actions from "../actions";
 import Latest from "./Latest";
 import Product from "./Product";
 import Search from "./Search";
+import DailyDeals from "./DailyDeals";
 import Brand from "./Brand";
 import Category from "./Category";
 
@@ -31,6 +32,9 @@ class App extends Component {
                   <Link className="right" to="/search">
                     Search
                   </Link>
+                  <Link className="right" to="/daily-deals">
+                    Daily Deals
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -39,6 +43,8 @@ class App extends Component {
           <Route exact path="/" component={Latest} />
 
           <Route exact path="/search" history={history} component={Search} />
+
+          <Route exact path="/daily-deals" history={history} component={DailyDeals} />
 
           <Route
             exact

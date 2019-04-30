@@ -3,7 +3,7 @@ import { apiActionExceptionHandler } from "../../util/apiActionExceptionHandler"
 import { clearAllErrors } from "..";
 import {
   DATA_FETCH_BRAND,
-  DATA_FETCH_CATEGORY,
+  DATA_FETCH_CATEGORY, DATA_FETCH_DAILY_DEALS,
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
   DATA_LOADING
@@ -69,6 +69,20 @@ export const fetchCategory = (categoryId = null) => async dispatch => {
   try {
     const res = await axios.get(`/api/category/${categoryId}`);
     dispatch({ type: DATA_FETCH_CATEGORY, payload: res.data });
+  } catch (e) {
+    dispatch(dataLoadingStop());
+    apiActionExceptionHandler(e, dispatch);
+  }
+};
+
+export const fetchDailyDeals = () => async dispatch => {
+
+  dispatch(clearAllErrors());
+  dispatch({ type: DATA_LOADING, payload: true });
+
+  try {
+    const res = await axios.get("/api/daily-deals");
+    dispatch({ type: DATA_FETCH_DAILY_DEALS, payload: res.data });
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);

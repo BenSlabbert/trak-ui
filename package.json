@@ -46,7 +46,7 @@
     "path-parser": "^4.2.0",
     "prop-types": "^15.6.2",
     "sync-exec": "^0.6.2",
-    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC#66aed715be699d8b86ec5982928ced32b23270bc",
+    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC#029ef649f81a6a1e8db4e2fa1741dc4539642983",
     "uuid": "^3.3.2",
     "winston": "^2.4.3",
     "winston-mongodb": "^3.0.2"

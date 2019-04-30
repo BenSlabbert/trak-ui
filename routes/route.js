@@ -271,10 +271,8 @@ module.exports = app => {
     }
   });
 
-  app.get("/api/promotion", async (req, res) => {
+  app.get("/api/daily-deals", async (req, res) => {
     let promotionRequest = new messages.PromotionRequest();
-
-    // todo implement ui
 
     // promotionRequest.setSaleDeal(true);
     promotionRequest.setDailyDeal(true);
