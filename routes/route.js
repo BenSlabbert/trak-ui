@@ -25,8 +25,8 @@ let categoryClientService = new services.CategoryServiceClient(
 );
 
 let promotionClientService = new services.PromotionServiceClient(
-    require('../config/routes').API_GRPC,
-    grpc.credentials.createInsecure()
+  require("../config/routes").API_GRPC,
+  grpc.credentials.createInsecure()
 );
 
 let searchClientService = new services.SearchServiceClient(
@@ -35,10 +35,8 @@ let searchClientService = new services.SearchServiceClient(
 );
 
 function getLatestResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.latest(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -52,10 +50,8 @@ function getLatestResponse(client, request) {
 }
 
 function getProductResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.product(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -69,10 +65,8 @@ function getProductResponse(client, request) {
 }
 
 function getBrandResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.brand(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -86,10 +80,8 @@ function getBrandResponse(client, request) {
 }
 
 function getCategoryResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.category(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -103,10 +95,8 @@ function getCategoryResponse(client, request) {
 }
 
 function getPromotionResponse(client, request) {
-
   return new Promise((resolve, reject) => {
-    client.promotions(request, function (err, response) {
-
+    client.promotions(request, function(err, response) {
       if (err) {
         return reject(err);
       } else {
@@ -120,10 +110,8 @@ function getPromotionResponse(client, request) {
 }
 
 function getSearchProductResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.productSearch(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -137,10 +125,8 @@ function getSearchProductResponse(client, request) {
 }
 
 function getSearchBrandsResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.brandSearch(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -154,10 +140,8 @@ function getSearchBrandsResponse(client, request) {
 }
 
 function getSearchCategoryResponse(client, request) {
-
   return new Promise((resolve, reject) => {
     client.categorySearch(request, function(err, response) {
-
       if (err) {
         return reject(err);
       } else {
@@ -170,129 +154,140 @@ function getSearchCategoryResponse(client, request) {
   });
 }
 
-module.exports = (app) => {
+module.exports = app => {
+  app.get("/api/latest", async (req, res) => {
+    let resp = await getLatestResponse(
+      latestClientService,
+      new messages.Empty()
+    );
 
-  app.get("/api/latest",
-    async (req, res) => {
+    if (!resp) {
+      res
+        .status(400)
+        .send({ error: "Error while retrieving latest products!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-      let resp = await getLatestResponse(latestClientService, new messages.Empty());
+  app.get("/api/product/:productId", async (req, res) => {
+    let productRequest = new messages.ProductRequest();
 
-      if (!resp) {
-        res.status(400).send({ error: "Error while retrieving latest products!" });
-      } else {
-        res.send(resp.toObject());
-      }
-    });
+    productRequest.setProductId(req.params.productId);
 
-  app.get("/api/product/:productId",
-    async (req, res) => {
+    let resp = await getProductResponse(productClientService, productRequest);
 
-      let productRequest = new messages.ProductRequest();
+    if (!resp) {
+      res
+        .status(400)
+        .send({ error: "Error while retrieving latest products!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-      productRequest.setProductId(req.params.productId);
+  app.get("/api/search/product", async (req, res) => {
+    let productRequest = new messages.SearchRequest();
+    productRequest.setSearch(req.query.s);
 
-      let resp = await getProductResponse(productClientService, productRequest);
+    let resp = await getSearchProductResponse(
+      searchClientService,
+      productRequest
+    );
 
-      if (!resp) {
-        res.status(400).send({ error: "Error while retrieving latest products!" });
-      } else {
-        res.send(resp.toObject());
-      }
-    });
+    if (!resp) {
+      res
+        .status(400)
+        .send({ error: "Error while retrieving latest products!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-  app.get("/api/search/product",
-    async (req, res) => {
+  app.get("/api/search/brand", async (req, res) => {
+    let productRequest = new messages.SearchRequest();
+    productRequest.setSearch(req.query.s);
 
-      let productRequest = new messages.SearchRequest();
-      productRequest.setSearch(req.query.s);
+    let resp = await getSearchBrandsResponse(
+      searchClientService,
+      productRequest
+    );
 
-      let resp = await getSearchProductResponse(searchClientService, productRequest);
+    if (!resp) {
+      res
+        .status(400)
+        .send({ error: "Error while retrieving latest products!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-      if (!resp) {
-        res.status(400).send({ error: "Error while retrieving latest products!" });
-      } else {
-        res.send(resp.toObject());
-      }
-    });
+  app.get("/api/search/category", async (req, res) => {
+    let productRequest = new messages.SearchRequest();
+    productRequest.setSearch(req.query.s);
 
-  app.get("/api/search/brand",
-    async (req, res) => {
+    let resp = await getSearchCategoryResponse(
+      searchClientService,
+      productRequest
+    );
 
-      let productRequest = new messages.SearchRequest();
-      productRequest.setSearch(req.query.s);
+    if (!resp) {
+      res
+        .status(400)
+        .send({ error: "Error while retrieving latest products!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-      let resp = await getSearchBrandsResponse(searchClientService, productRequest);
+  app.get("/api/brand/:brandId", async (req, res) => {
+    let brandRequest = new messages.BrandRequest();
 
-      if (!resp) {
-        res.status(400).send({ error: "Error while retrieving latest products!" });
-      } else {
-        res.send(resp.toObject());
-      }
-    });
+    brandRequest.setBrandId(req.params.brandId);
 
-  app.get("/api/search/category",
-    async (req, res) => {
+    let resp = await getBrandResponse(brandClientService, brandRequest);
 
-      let productRequest = new messages.SearchRequest();
-      productRequest.setSearch(req.query.s);
+    if (!resp) {
+      res.status(400).send({ error: "Error while retrieving brand!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-      let resp = await getSearchCategoryResponse(searchClientService, productRequest);
+  app.get("/api/category/:categoryId", async (req, res) => {
+    let categoryRequest = new messages.CategoryRequest();
 
-      if (!resp) {
-        res.status(400).send({ error: "Error while retrieving latest products!" });
-      } else {
-        res.send(resp.toObject());
-      }
-    });
+    categoryRequest.setCategoryId(req.params.categoryId);
 
-  app.get("/api/brand/:brandId",
-    async (req, res) => {
+    let resp = await getCategoryResponse(
+      categoryClientService,
+      categoryRequest
+    );
 
-      let brandRequest = new messages.BrandRequest();
+    if (!resp) {
+      res.status(400).send({ error: "Error while retrieving category!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 
-      brandRequest.setBrandId(req.params.brandId);
+  app.get("/api/promotion", async (req, res) => {
+    let promotionRequest = new messages.PromotionRequest();
 
-      let resp = await getBrandResponse(brandClientService, brandRequest);
+    // todo implement ui
 
-      if (!resp) {
-        res.status(400).send({ error: "Error while retrieving brand!" });
-      } else {
-        res.send(resp.toObject());
-      }
-    });
+    // promotionRequest.setSaleDeal(true);
+    promotionRequest.setDailyDeal(true);
 
-  app.get("/api/category/:categoryId",
-    async (req, res) => {
+    let resp = await getPromotionResponse(
+      promotionClientService,
+      promotionRequest
+    );
 
-      let categoryRequest = new messages.CategoryRequest();
-
-      categoryRequest.setCategoryId(req.params.categoryId);
-
-      let resp = await getCategoryResponse(categoryClientService, categoryRequest);
-
-        if (!resp) {
-          res.status(400).send({ error: 'Error while retrieving category!' });
-        } else {
-          res.send(resp.toObject());
-        }
-      });
-
-  app.get('/api/promotion',
-      async (req, res) => {
-
-        let promotionRequest = new messages.PromotionRequest();
-
-        // todo implement ui
-
-        // promotionRequest.setSaleDeal(true);
-        promotionRequest.setDailyDeal(true);
-
-        let resp = await getPromotionResponse(promotionClientService, promotionRequest);
-
-        if (!resp) {
-          res.status(400).send({ error: 'Error while retrieving promotion!' });
-        } else {
-          res.send(resp.toObject());
-        }
-      });
+    if (!resp) {
+      res.status(400).send({ error: "Error while retrieving promotion!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 };
