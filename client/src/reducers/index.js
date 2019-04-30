@@ -1,9 +1,9 @@
-import { combineReducers } from 'redux';
-import { reducer as reduxForm } from 'redux-form';
+import { combineReducers } from "redux";
+import { reducer as reduxForm } from "redux-form";
 
-import errorReducer from './errorReducer';
-import dataReducer from './dataReducer';
-import searchReducer from './searchReducer';
+import errorReducer from "./errorReducer";
+import dataReducer from "./dataReducer";
+import searchReducer from "./searchReducer";
 
 export default combineReducers({
   error: errorReducer,

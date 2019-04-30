@@ -1,13 +1,13 @@
-import axios from 'axios';
-import { apiActionExceptionHandler } from '../../util/apiActionExceptionHandler';
-import { clearAllErrors } from '..';
+import axios from "axios";
+import { apiActionExceptionHandler } from "../../util/apiActionExceptionHandler";
+import { clearAllErrors } from "..";
 import {
   DATA_FETCH_BRAND,
   DATA_FETCH_CATEGORY,
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
   DATA_LOADING
-} from './dataTypes';
+} from "./dataTypes";
 
 export const dataLoadingStop = () => {
   return { type: DATA_LOADING, payload: false };
@@ -32,7 +32,7 @@ export const fetchProduct = (productId = null) => async dispatch => {
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
-  if (!productId) throw Error('missing productId!');
+  if (!productId) throw Error("missing productId!");
 
   try {
     const res = await axios.get(`/api/product/${productId}`);
@@ -48,7 +48,7 @@ export const fetchBrand = (brandId = null) => async dispatch => {
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
-  if (!brandId) throw Error('missing brandId!');
+  if (!brandId) throw Error("missing brandId!");
 
   try {
     const res = await axios.get(`/api/brand/${brandId}`);
@@ -64,7 +64,7 @@ export const fetchCategory = (categoryId = null) => async dispatch => {
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
-  if (!categoryId) throw Error('missing categoryId!');
+  if (!categoryId) throw Error("missing categoryId!");
 
   try {
     const res = await axios.get(`/api/category/${categoryId}`);

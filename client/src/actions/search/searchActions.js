@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { apiActionExceptionHandler } from '../../util/apiActionExceptionHandler';
-import { clearAllErrors } from '..';
+import axios from "axios";
+import { apiActionExceptionHandler } from "../../util/apiActionExceptionHandler";
+import { clearAllErrors } from "..";
 import { SEARCH_PRODUCTS, SEARCH_LOADING, SEARCH_BRANDS, SEARCH_CATEGORIES } from "./searchTypes";
 import { DATA_LOADING } from "../data/dataTypes";
 
