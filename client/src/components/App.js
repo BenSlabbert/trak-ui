@@ -17,53 +17,55 @@ class App extends Component {
   render() {
     const { history, match } = this.props;
 
-    return <BrowserRouter>
-      <div className="container">
-        <nav>
-          <div className="nav-wrapper">
-            <div className="brand-logo left">
-              <Link to="/">Trak</Link>
+    return (
+      <BrowserRouter>
+        <div className="container">
+          <nav>
+            <div className="nav-wrapper">
+              <div className="brand-logo left">
+                <Link to="/">Trak</Link>
+              </div>
+
+              <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li>
+                  <Link className="right" to="/search">
+                    Search
+                  </Link>
+                </li>
+              </ul>
             </div>
+          </nav>
 
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li>
-                <Link className="right" to="/search">
-                  Search
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          <Route exact path="/" component={Latest} />
 
-        <Route exact path="/" component={Latest}/>
+          <Route exact path="/search" history={history} component={Search} />
 
-        <Route exact path="/search" history={history} component={Search}/>
+          <Route
+            exact
+            path="/product/:productId"
+            match={match}
+            history={history}
+            component={Product}
+          />
 
-        <Route
-          exact
-          path="/product/:productId"
-          match={match}
-          history={history}
-          component={Product}
-        />
+          <Route
+            exact
+            path="/brand/:brandId"
+            match={match}
+            history={history}
+            component={Brand}
+          />
 
-        <Route
-          exact
-          path="/brand/:brandId"
-          match={match}
-          history={history}
-          component={Brand}
-        />
-
-        <Route
-          exact
-          path="/category/:categoryId"
-          match={match}
-          history={history}
-          component={Category}
-        />
-      </div>
-    </BrowserRouter>;
+          <Route
+            exact
+            path="/category/:categoryId"
+            match={match}
+            history={history}
+            component={Category}
+          />
+        </div>
+      </BrowserRouter>
+    );
   }
 }
 
