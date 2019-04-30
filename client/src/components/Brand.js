@@ -7,7 +7,6 @@ import _ from "lodash";
 import LatestItem from "./LatestItem";
 
 class Brand extends Component {
-
   componentDidMount() {
     const { match, fetchBrand } = this.props;
     let brandId = match.params.brandId;
@@ -15,26 +14,25 @@ class Brand extends Component {
   }
 
   render() {
-
     const { history, brand } = this.props;
 
-    return <div>
+    return (
+      <div>
+        <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
 
-      <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
+        <div className="row">
+          {brand && brand.productsList
+            ? _.map(brand.productsList, l => (
+                <LatestItem key={l.productUrl} item={l} />
+              ))
+            : undefined}
+        </div>
 
-      <div className='row'>
-        {brand && brand.productsList ? _.map(brand.productsList, l =>
-          <LatestItem
-            key={l.productUrl} item={l}/>) : undefined}
+        <button onClick={() => history.goBack()} className="btn">
+          back
+        </button>
       </div>
-
-      <button
-        onClick={() => history.goBack()}
-        className='btn'
-      >
-        back
-      </button>
-    </div>;
+    );
   }
 }
 
@@ -50,4 +48,7 @@ function mapStateToProps({ error, data }) {
   };
 }
 
-export default connect(mapStateToProps, actions)(withRouter(Brand));
+export default connect(
+  mapStateToProps,
+  actions
+)(withRouter(Brand));

@@ -10,28 +10,24 @@ import Brand from "./Brand";
 import Category from "./Category";
 
 class App extends Component {
-
   componentDidMount() {
     this.props.fetchLatestProducts();
   }
 
   render() {
-
     const { history, match } = this.props;
 
     return <BrowserRouter>
-      <div className='container'>
+      <div className="container">
         <nav>
-          <div className='nav-wrapper'>
-            <div className='brand-logo left'>
-              <Link to='/'>
-                Trak
-              </Link>
+          <div className="nav-wrapper">
+            <div className="brand-logo left">
+              <Link to="/">Trak</Link>
             </div>
 
             <ul id="nav-mobile" className="right hide-on-med-and-down">
               <li>
-                <Link className='right' to='/search'>
+                <Link className="right" to="/search">
                   Search
                 </Link>
               </li>
@@ -39,22 +35,13 @@ class App extends Component {
           </div>
         </nav>
 
-        <Route
-          exact
-          path='/'
-          component={Latest}
-        />
+        <Route exact path="/" component={Latest}/>
+
+        <Route exact path="/search" history={history} component={Search}/>
 
         <Route
           exact
-          path='/search'
-          history={history}
-          component={Search}
-        />
-
-        <Route
-          exact
-          path='/product/:productId'
+          path="/product/:productId"
           match={match}
           history={history}
           component={Product}
@@ -62,7 +49,7 @@ class App extends Component {
 
         <Route
           exact
-          path='/brand/:brandId'
+          path="/brand/:brandId"
           match={match}
           history={history}
           component={Brand}
@@ -70,7 +57,7 @@ class App extends Component {
 
         <Route
           exact
-          path='/category/:categoryId'
+          path="/category/:categoryId"
           match={match}
           history={history}
           component={Category}
@@ -84,7 +71,6 @@ App.propTypes = {
   fetchLatestProducts: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   err: PropTypes.object
-
 };
 
 function mapStateToProps({ error }) {
@@ -93,4 +79,7 @@ function mapStateToProps({ error }) {
   };
 }
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(
+  mapStateToProps,
+  actions
+)(App);
