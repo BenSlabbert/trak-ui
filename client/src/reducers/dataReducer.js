@@ -3,31 +3,34 @@ import {
   DATA_FETCH_CATEGORY,
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
+  DATA_FETCH_DAILY_DEALS,
   DATA_LOADING,
   DATA_ADD_PRODUCT
 } from "../actions/data/dataTypes";
 
-export default function (state = null, action) {
-
+export default function(state = null, action) {
   switch (action.type) {
 
     case DATA_FETCH_LATEST_PRODUCTS:
-      return { latest: action.payload };
+      return { latest: action.payload , isLoading: false };
 
     case DATA_FETCH_PRODUCT:
-      return { product: action.payload };
+      return { product: action.payload , isLoading: false };
 
     case DATA_FETCH_BRAND:
-      return { brand: action.payload };
+      return { brand: action.payload , isLoading: false };
 
     case DATA_FETCH_CATEGORY:
+      return { category: action.payload , isLoading: false };
+
+    case DATA_FETCH_DAILY_DEALS:
+      return { dailyDeals: action.payload, isLoading: false };
+
+    case DATA_ADD_PRODUCT:
       return { category: action.payload };
 
     case DATA_LOADING:
-      return { category: action.payload };
-
-      case DATA_ADD_PRODUCT:
-      return { category: action.payload };
+      return { isLoading: action.payload };
 
     default:
       return state;

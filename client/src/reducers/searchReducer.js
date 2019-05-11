@@ -1,11 +1,13 @@
-import { SEARCH_BRANDS, SEARCH_CATEGORIES, SEARCH_LOADING, SEARCH_PRODUCTS } from "../actions/search/searchTypes";
+import {
+  SEARCH_BRANDS,
+  SEARCH_CATEGORIES,
+  SEARCH_LOADING,
+  SEARCH_PRODUCTS
+} from "../actions/search/searchTypes";
 
-export default function (state = null, action) {
-
+export default function(state = null, action) {
   switch (action.type) {
-
     case SEARCH_PRODUCTS:
-
       if (state && state.searchProducts) {
         state.searchProducts = action.payload;
       }
@@ -13,7 +15,6 @@ export default function (state = null, action) {
       return { searchProducts: action.payload, ...state, isLoading: false };
 
     case SEARCH_BRANDS:
-
       if (state && state.searchBrands) {
         state.searchBrands = action.payload;
       }
@@ -21,7 +22,6 @@ export default function (state = null, action) {
       return { searchBrands: action.payload, ...state, isLoading: false };
 
     case SEARCH_CATEGORIES:
-
       if (state && state.searchCategories) {
         state.searchCategories = action.payload;
       }

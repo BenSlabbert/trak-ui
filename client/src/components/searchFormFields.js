@@ -1,8 +1,8 @@
 export default [
   {
-    name: 'search',
-    inputType: 'text',
+    name: "search",
+    inputType: "text",
     required: false,
-    placeholder: 'search'
+    placeholder: "search"
   }
 ];
