@@ -104,3 +104,4 @@ export const addProduct = (productId = null) => async dispatch => {
   } catch (e) {
 
   }
+};
