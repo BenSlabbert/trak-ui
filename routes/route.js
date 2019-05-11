@@ -290,8 +290,5 @@ module.exports = app => {
   });
 
   // todo
-  app.post('/api/add/',
-    async (req, res) => {
-
-    });
+  app.post("/api/add/", async (req, res) => {});
 };
