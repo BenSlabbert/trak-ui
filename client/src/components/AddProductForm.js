@@ -6,6 +6,7 @@ import { ADD_FORM } from "../util/forms";
 import FORM_FIELDS from './addFormFields';
 import TextInput from "./forms/TextInput";
 import _ from 'lodash';
+import { withRouter } from "react-router-dom";
 
 class AddProductForm extends Component {
 
@@ -23,20 +24,18 @@ class AddProductForm extends Component {
 
     const {
       addForm,
-      addProduct
+      addProduct,
+      history
     } = this.props;
 
     if (addForm && addForm.values && addForm.values.add) {
-      addProduct(addForm.values.add);
+      addProduct(addForm.values.add, history);
     }
   }
 
   render() {
 
-    const { handleSubmit, data, history, isLoading } = this.props;
-
-    console.log(data);
-    
+    const { handleSubmit, data, history, isLoading, err } = this.props;
 
     return <div>
 
@@ -79,18 +78,21 @@ class AddProductForm extends Component {
   }
 }
 
-function mapStateToProps({ error, form, data }) {
+function mapStateToProps({ error, form, data, error: err }) {
 
   let addForm = form[ADD_FORM];
 
   return {
     data,
-    err: error,
+    err,
     isLoading: data && data.isLoading ? data.isLoading : false,
     addForm: addForm ? addForm : null
   }
 }
 
-export default connect(mapStateToProps, actions)(reduxForm({
+export default connect(
+  mapStateToProps,
+  actions)
+(withRouter(reduxForm({
   form: ADD_FORM
-})(AddProductForm));
+})(AddProductForm)));

@@ -90,7 +90,7 @@ export const fetchDailyDeals = () => async dispatch => {
   }
 };
 
-export const addProduct = (productId = null) => async dispatch => {
+export const addProduct = (productId = null, history) => async dispatch => {
   if (!productId) throw Error('missing productId!');
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
@@ -98,6 +98,12 @@ export const addProduct = (productId = null) => async dispatch => {
   try {
     const res = await axios.post(`/api/add/`, { productId });
     dispatch({ type: DATA_ADD_PRODUCT, payload: res.data });
+
+    if(res.data && res.data && res.data.productId) {
+      const productId = res.data.productId;
+      history.push(`product/${productId}`);
+    }
+
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);

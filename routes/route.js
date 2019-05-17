@@ -304,10 +304,8 @@ module.exports = app => {
     }
   });
 
-  // todo
   app.post("/api/add/", async (req, res) => {
     const { productId } = req.body;
-    console.log(productId)
 
     let addProductRequest = new messages.AddProductRequest();
     addProductRequest.setPlId(productId);
@@ -318,7 +316,7 @@ module.exports = app => {
     );
 
     if (!resp) {
-      res.status(400).send({ error: "Error while retrieving promotion!" });
+      res.status(400).send({ error: `Failed to find product!` });
     } else {
       res.send(resp.toObject());
     }
