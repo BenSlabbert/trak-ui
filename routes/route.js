@@ -64,6 +64,21 @@ function getProductResponse(client, request) {
   });
 }
 
+function getAddProductResponse(client, request) {
+  return new Promise((resolve, reject) => {
+    client.addProduct(request, function(err, response) {
+      if (err) {
+        return reject(err);
+      } else {
+        return resolve(response);
+      }
+    });
+  }).catch(e => {
+    logger.error({ code: e.code, message: e.message, details: e.details });
+    return null;
+  });
+}
+
 function getBrandResponse(client, request) {
   return new Promise((resolve, reject) => {
     client.brand(request, function(err, response) {
@@ -290,5 +305,22 @@ module.exports = app => {
   });
 
   // todo
-  app.post("/api/add/", async (req, res) => {});
+  app.post("/api/add/", async (req, res) => {
+    const { productId } = req.body;
+    console.log(productId)
+
+    let addProductRequest = new messages.AddProductRequest();
+    addProductRequest.setPlId(productId);
+
+    let resp = await getAddProductResponse(
+      productClientService,
+      addProductRequest
+    );
+
+    if (!resp) {
+      res.status(400).send({ error: "Error while retrieving promotion!" });
+    } else {
+      res.send(resp.toObject());
+    }
+  });
 };

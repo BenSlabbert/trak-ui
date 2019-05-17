@@ -27,7 +27,7 @@ export default function(state = null, action) {
       return { dailyDeals: action.payload, isLoading: false };
 
     case DATA_ADD_PRODUCT:
-      return { category: action.payload };
+      return { addProduct: action.payload, isLoading: false };
 
     case DATA_LOADING:
       return { isLoading: action.payload };

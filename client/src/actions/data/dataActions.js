@@ -90,18 +90,16 @@ export const fetchDailyDeals = () => async dispatch => {
   }
 };
 
-// todo
 export const addProduct = (productId = null) => async dispatch => {
   if (!productId) throw Error('missing productId!');
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
   try {
-    const res = await axios.post(`/api/add/`);
+    const res = await axios.post(`/api/add/`, { productId });
     dispatch({ type: DATA_ADD_PRODUCT, payload: res.data });
-
-
   } catch (e) {
-
+    dispatch(dataLoadingStop());
+    apiActionExceptionHandler(e, dispatch);
   }
 };

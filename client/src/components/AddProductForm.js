@@ -33,7 +33,10 @@ class AddProductForm extends Component {
 
   render() {
 
-    const { handleSubmit, add, history, isLoading } = this.props;
+    const { handleSubmit, data, history, isLoading } = this.props;
+
+    console.log(data);
+    
 
     return <div>
 
@@ -76,14 +79,14 @@ class AddProductForm extends Component {
   }
 }
 
-function mapStateToProps({ error, form, add }) {
+function mapStateToProps({ error, form, data }) {
 
   let addForm = form[ADD_FORM];
 
   return {
-    add,
+    data,
     err: error,
-    isLoading: add && add.isLoading,
+    isLoading: data && data.isLoading ? data.isLoading : false,
     addForm: addForm ? addForm : null
   }
 }
