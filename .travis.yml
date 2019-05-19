@@ -13,3 +13,4 @@ cache:
 script:
   - yarn install
   - yarn --cwd client install
+  - yarn --cwd client build
