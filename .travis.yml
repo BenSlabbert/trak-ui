@@ -4,12 +4,12 @@ node_js:
   - "10"
 
 before_install:
-  - sudo curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
   - export PATH=$HOME/.yarn/bin:$PATH
 
 cache:
   yarn: true
 
 script:
-  - yarn
-  - yarn --cwd client
+  - yarn install
+  - yarn --cwd client build
