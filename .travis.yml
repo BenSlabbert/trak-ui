@@ -1,3 +1,6 @@
+services:
+  - docker
+
 language: node_js
 
 node_js:
@@ -14,3 +17,4 @@ script:
   - yarn install
   - yarn --cwd client install
   - yarn --cwd client build
+  - docker build -t benjaminslabbert/trak_ui:1.0.2-$(date +%F_%H-%M-%S)
