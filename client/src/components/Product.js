@@ -32,7 +32,7 @@ class Product extends Component {
               <div className="col s8 m8 l8">
                 <img
                   src={product.product.imageUrl}
-                  alt="product image"
+                  alt="product"
                   className="responsive-img hoverable center-block center center-align"
                   style={{ width: "200px", height: "200px" }}
                   onClick={() =>

@@ -10,7 +10,7 @@ export default ({ item = null }) => {
         <div>
           <img
             src={item.imageUrl}
-            alt="product image"
+            alt="product"
             className="responsive-img hoverable center-block"
             style={{ width: "50%", height: "50%" }}
             onClick={() => window.open(item.productUrl, "_blank")}
