@@ -20,14 +20,12 @@ class DailyDeals extends Component {
           <div className="progress">
             <div className="indeterminate" />
           </div>
-        ) : (
-          undefined
-        )}
+        ) : undefined}
       </div>
 
       <div className="row">
-        {data && data.productsList
-          ? _.map(data.productsList, l => (
+        {data && data.products
+          ? _.map(data.products, l => (
             <LatestItem key={l.productUrl} item={l} />
           ))
           : undefined}

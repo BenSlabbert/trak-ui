@@ -72,7 +72,7 @@ class Search extends Component {
               {search && search.searchProducts ? (
                 <div>
                   <h6>Products</h6>
-                  {_.map(search.searchProducts.resultsList, l => (
+                  {_.map(search.searchProducts.results, l => (
                     <div key={l.id}>
                       <Link to={`/product/${l.id}`}>
                         {this.showName(l.name)}
@@ -89,7 +89,7 @@ class Search extends Component {
               {search && search.searchBrands ? (
                 <div>
                   <h6>Brands</h6>
-                  {_.map(search.searchBrands.resultsList, l => (
+                  {_.map(search.searchBrands.results, l => (
                     <div key={l.id}>
                       <Link to={`/brand/${l.id}`}>{this.showName(l.name)}</Link>
                     </div>
@@ -104,7 +104,7 @@ class Search extends Component {
               {search && search.searchCategories ? (
                 <div>
                   <h6>Categories</h6>
-                  {_.map(search.searchCategories.resultsList, l => (
+                  {_.map(search.searchCategories.results, l => (
                     <div key={l.id}>
                       <Link to={`/category/${l.id}`}>
                         {this.showName(l.name)}

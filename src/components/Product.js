@@ -66,7 +66,7 @@ class Product extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {_.map(product.product.categoriesList, c => (
+                    {_.map(product.product.categories, c => (
                       <tr key={c.id}>
                         <td key={c.id}>
                           <Link to={`/category/${c.id}`}>{c.name}</Link>
@@ -100,9 +100,9 @@ class Product extends Component {
             <div className="row col s12 m12 l12">
               <LineChart
                 data={{
-                  labels: product.stats.chartData.labelsList.slice(0, 5),
+                  labels: product.stats.chartData.labels.slice(0, 5),
                   datasets: _.map(
-                    product.stats.chartData.dataSetsList.slice(0, 5),
+                    product.stats.chartData.dataSets.slice(0, 5),
                     l => {
                       return {
                         data: l.dataList,

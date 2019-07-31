@@ -1,17 +1,16 @@
-# Trak UI
+Create react app with SASS
 
-## Sonar
+This project has preconfigured a sass preprocessor. This project also pulls down [Materialize](http://materializecss.com/) and
+shows an example of overriding some the default colors in Materialize. (see file App.scss)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BenSlabbert_trak_ui&metric=alert_status)](https://sonarcloud.io/dashboard?id=BenSlabbert_trak_ui)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=BenSlabbert_trak_ui&metric=code_smells)](https://sonarcloud.io/dashboard?id=BenSlabbert_trak_ui)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=BenSlabbert_trak_ui&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=BenSlabbert_trak_ui)
-[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=BenSlabbert_trak_ui&metric=security_rating)](https://sonarcloud.io/dashboard?id=BenSlabbert_trak_ui)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=BenSlabbert_trak_ui&metric=sqale_index)](https://sonarcloud.io/dashboard?id=BenSlabbert_trak_ui)
+see here for accepted answer in [StackOverflow](https://stackoverflow.com/a/42515471/4841710)
 
-### Running Sonar
+run
 
-`yarn run sonar-scanner -Dsonar.login=$YOUR_SONAR_ACCESS_TOKEN`
+`yarn start`
 
-### Generate gRPC
+build
 
-`grpc_tools_node_protoc --js_out=import_style=commonjs,binary:proto/ --grpc_out=proto/ --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` proto/proto.proto`
+`yarn build`
+
+see: [React Docs](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#adding-a-css-preprocessor-sass-less-etc) for more info

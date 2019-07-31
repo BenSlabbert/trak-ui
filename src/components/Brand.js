@@ -6,25 +6,23 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import LatestItem from "./LatestItem";
 
-class Category extends Component {
+class Brand extends Component {
   componentDidMount() {
-    const { match, fetchCategory } = this.props;
-    let categoryId = match.params.categoryId;
-    fetchCategory(categoryId);
+    const { match, fetchBrand } = this.props;
+    let brandId = match.params.brandId;
+    fetchBrand(brandId);
   }
 
   render() {
-    const { history, category } = this.props;
+    const { history, brand } = this.props;
 
     return (
       <div>
-        <h3>
-          Category: {category && category.name ? category.name : undefined}
-        </h3>
+        <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
 
         <div className="row">
-          {category && category.productsList
-            ? _.map(category.productsList, l => (
+          {brand && brand.products
+            ? _.map(brand.products, l => (
                 <LatestItem key={l.productUrl} item={l} />
               ))
             : undefined}
@@ -38,7 +36,7 @@ class Category extends Component {
   }
 }
 
-Category.propTypes = {
+Brand.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired
 };
@@ -46,11 +44,11 @@ Category.propTypes = {
 function mapStateToProps({ error, data }) {
   return {
     err: error,
-    category: data && data.category ? data.category : undefined
+    brand: data && data.brand ? data.brand : undefined
   };
 }
 
 export default connect(
   mapStateToProps,
   actions
-)(withRouter(Category));
+)(withRouter(Brand));

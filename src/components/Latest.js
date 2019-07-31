@@ -13,19 +13,17 @@ class Latest extends Component {
   render() {
     const { data } = this.props;
 
-    return (
-      <div>
-        <h5>Latest Products</h5>
+    return <div>
+      <h5>Latest Products</h5>
 
-        <div className="row">
-          {data && data.latest && data.latest.productsList
-            ? _.map(data.latest.productsList, l => (
-                <LatestItem key={l.productUrl} item={l} />
-              ))
+      <div className="row">
+        {data && data.latest && data.latest.products
+            ? _.map(data.latest.products, l => (
+                <LatestItem key={l.productUrl} item={l}/>
+            ))
             : undefined}
-        </div>
       </div>
-    );
+    </div>;
   }
 }
 

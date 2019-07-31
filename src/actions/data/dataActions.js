@@ -1,6 +1,6 @@
 import axios from "axios";
 import { apiActionExceptionHandler } from "../../util/apiActionExceptionHandler";
-import { clearAllErrors } from "..";
+import { clearAllErrors } from "../index";
 import {
   DATA_FETCH_BRAND,
   DATA_FETCH_CATEGORY, DATA_FETCH_DAILY_DEALS,
