@@ -24,6 +24,33 @@ class DailyDeals extends Component {
       </div>
 
       <div className="row">
+        {data && data.pageResponse ? (
+            <table>
+              <thead>
+              <tr>
+                <td>Page Number</td>
+                <td>First Page</td>
+                <td>Last Page</td>
+                <td>Last page number</td>
+                <td>Page size</td>
+                <td>Total Items</td>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>{data.pageResponse.currentPageNumber}</td>
+                <td>{data.pageResponse.isFirstPage? "Yes": "No"}</td>
+                <td>{data.pageResponse.isLastPage? "Yes" : "NO"}</td>
+                <td>{data.pageResponse.lastPageNumber}</td>
+                <td>{data.pageResponse.pageSize}</td>
+                <td>{data.pageResponse.totalItems}</td>
+              </tr>
+              </tbody>
+            </table>
+        ) : undefined}
+      </div>
+
+      <div className="row">
         {data && data.products
           ? _.map(data.products, l => (
             <LatestItem key={l.productUrl} item={l} />
