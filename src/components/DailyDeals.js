@@ -4,7 +4,7 @@ import * as actions from "../actions";
 import LatestItem from "./LatestItem";
 import _ from "lodash";
 
-const showPage = (pageResponse) => {
+const showPage = (pr) => {
   return <table>
       <thead>
       <tr>
@@ -18,19 +18,19 @@ const showPage = (pageResponse) => {
       </thead>
       <tbody>
       <tr>
-        <td>{pageResponse.currentPageNumber}</td>
-        <td>{pageResponse.isFirstPage? "Yes": "No"}</td>
-        <td>{pageResponse.isLastPage? "Yes" : "NO"}</td>
-        <td>{pageResponse.lastPageNumber}</td>
-        <td>{pageResponse.pageSize}</td>
-        <td>{pageResponse.totalItems}</td>
+        <td>{pr.currentPageNumber}</td>
+        <td>{pr.isFirstPage? "Yes": "No"}</td>
+        <td>{pr.isLastPage? "Yes" : "NO"}</td>
+        <td>{pr.lastPageNumber}</td>
+        <td>{pr.pageSize}</td>
+        <td>{pr.totalItems}</td>
       </tr>
       </tbody>
     </table>
 };
 
-const showLatest = (products) => {
-  return _.map(products, l => <LatestItem key={l.productUrl} item={l}/>);
+const showLatest = (p) => {
+  return _.map(p, l => <LatestItem key={l.productUrl} item={l}/>);
 };
 
 class DailyDeals extends Component {

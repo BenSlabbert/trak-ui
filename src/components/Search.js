@@ -8,8 +8,8 @@ import TextInput from "./forms/TextInput";
 import _ from "lodash";
 import { Link } from "react-router-dom";
 
-const showName = (name) => {
-  return name.length > 60 ? name.substring(0, 60) + "..." : name;
+const showName = (n) => {
+  return n.length > 60 ? n.substring(0, 60) + "..." : n;
 };
 
 class Search extends Component {

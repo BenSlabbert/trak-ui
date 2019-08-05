@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
-const showLatest = (products) => {
-  return _.map(products, l => <LatestItem key={l.productUrl} item={l}/>);
+const showLatest = (p) => {
+  return _.map(p, l => <LatestItem key={l.productUrl} item={l}/>);
 };
 
-const hasLatest = (data) => {
-  return data && data.latest && data.latest.products;
+const hasLatest = (d) => {
+  return d && d.latest && d.latest.products;
 };
 
 class Latest extends Component {

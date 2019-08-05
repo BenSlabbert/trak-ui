@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import LatestItem from "./LatestItem";
 
-const showLatest = (products) => {
-  return _.map(products, l => <LatestItem key={l.productUrl} item={l}/>);
+const showLatest = (p) => {
+  return _.map(p, l => <LatestItem key={l.productUrl} item={l}/>);
 };
 
 class Category extends Component {
