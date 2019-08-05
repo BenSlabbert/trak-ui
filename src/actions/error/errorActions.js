@@ -10,7 +10,6 @@ export const clearAllErrors = () => {
 };
 
 export const reportError = (error) => async dispatch => {
-
   dispatch({ type: ERROR_LOADING, payload: true });
 
   try {

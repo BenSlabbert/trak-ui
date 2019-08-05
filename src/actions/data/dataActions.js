@@ -14,7 +14,6 @@ export const dataLoadingStop = () => {
 };
 
 export const fetchLatestProducts = () => async dispatch => {
-
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
@@ -28,7 +27,6 @@ export const fetchLatestProducts = () => async dispatch => {
 };
 
 export const fetchProduct = (productId = null) => async dispatch => {
-
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
@@ -44,7 +42,6 @@ export const fetchProduct = (productId = null) => async dispatch => {
 };
 
 export const fetchBrand = (brandId = null) => async dispatch => {
-
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
@@ -60,7 +57,6 @@ export const fetchBrand = (brandId = null) => async dispatch => {
 };
 
 export const fetchCategory = (categoryId = null) => async dispatch => {
-
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 
@@ -76,7 +72,6 @@ export const fetchCategory = (categoryId = null) => async dispatch => {
 };
 
 export const fetchDailyDeals = () => async dispatch => {
-
   dispatch(clearAllErrors());
   dispatch({ type: DATA_LOADING, payload: true });
 

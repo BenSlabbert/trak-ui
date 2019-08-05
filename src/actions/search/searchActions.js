@@ -9,7 +9,6 @@ export const searchLoadingStop = () => {
 };
 
 export const fetchSearchProducts = (search = null) => async dispatch => {
-
   dispatch(clearAllErrors());
 
   if (!search) {
@@ -28,7 +27,6 @@ export const fetchSearchProducts = (search = null) => async dispatch => {
 };
 
 export const fetchSearchBrands = (search = null) => async dispatch => {
-
   dispatch(clearAllErrors());
 
   if (!search) {
@@ -47,7 +45,6 @@ export const fetchSearchBrands = (search = null) => async dispatch => {
 };
 
 export const fetchSearchCategories = (search = null) => async dispatch => {
-
   dispatch(clearAllErrors());
 
   if (!search) {
