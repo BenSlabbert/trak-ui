@@ -5,6 +5,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as actions from "../actions";
 
+const showLatest = (products) => {
+  return _.map(products, l => <LatestItem key={l.productUrl} item={l}/>);
+};
+
+const hasLatest = (data) => {
+  return data && data.latest && data.latest.products;
+};
+
 class Latest extends Component {
   componentDidMount() {
     this.props.fetchLatestProducts();
@@ -17,11 +25,7 @@ class Latest extends Component {
       <h5>Latest Products</h5>
 
       <div className="row">
-        {data && data.latest && data.latest.products
-            ? _.map(data.latest.products, l => (
-                <LatestItem key={l.productUrl} item={l}/>
-            ))
-            : undefined}
+        {hasLatest(data) ? showLatest(data.latest.products) : undefined}
       </div>
     </div>;
   }

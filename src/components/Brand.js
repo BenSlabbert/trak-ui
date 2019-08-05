@@ -16,23 +16,21 @@ class Brand extends Component {
   render() {
     const { history, brand } = this.props;
 
-    return (
-      <div>
-        <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
+    return <div>
+      <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
 
-        <div className="row">
-          {brand && brand.products
+      <div className="row">
+        {brand && brand.products
             ? _.map(brand.products, l => (
-                <LatestItem key={l.productUrl} item={l} />
-              ))
+                <LatestItem key={l.productUrl} item={l}/>
+            ))
             : undefined}
-        </div>
-
-        <button onClick={() => history.goBack()} className="btn">
-          back
-        </button>
       </div>
-    );
+
+      <button onClick={() => history.goBack()} className="btn">
+        back
+      </button>
+    </div>;
   }
 }
 

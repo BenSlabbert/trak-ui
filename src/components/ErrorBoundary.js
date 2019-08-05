@@ -20,17 +20,15 @@ class ErrorBoundary extends Component {
     console.log(err);
 
     if (hasError) {
-      return (
+      return <div className="container">
         <div className="container">
-          <div className="container">
-            <h6>We ran into an error!</h6>
+          <h6>We ran into an error!</h6>
 
-            <button className="btn" onClick={() => (window.location = "/hex")}>
-              Take me Home
-            </button>
-          </div>
+          <button className="btn" onClick={() => (window.location = "/hex")}>
+            Take me Home
+          </button>
         </div>
-      );
+      </div>;
     }
 
     return this.props.children;

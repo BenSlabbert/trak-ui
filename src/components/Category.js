@@ -6,6 +6,10 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import LatestItem from "./LatestItem";
 
+const showLatest = (products) => {
+  return _.map(products, l => <LatestItem key={l.productUrl} item={l}/>);
+};
+
 class Category extends Component {
   componentDidMount() {
     const { match, fetchCategory } = this.props;
@@ -16,25 +20,19 @@ class Category extends Component {
   render() {
     const { history, category } = this.props;
 
-    return (
-      <div>
-        <h3>
-          Category: {category && category.name ? category.name : undefined}
-        </h3>
+    return <div>
+      <h3>
+        Category: {category && category.name ? category.name : undefined}
+      </h3>
 
-        <div className="row">
-          {category && category.products
-            ? _.map(category.products, l => (
-                <LatestItem key={l.productUrl} item={l} />
-              ))
-            : undefined}
-        </div>
-
-        <button onClick={() => history.goBack()} className="btn">
-          back
-        </button>
+      <div className="row">
+        {category && category.products ? showLatest(category.products) : undefined}
       </div>
-    );
+
+      <button onClick={() => history.goBack()} className="btn">
+        back
+      </button>
+    </div>;
   }
 }
 
