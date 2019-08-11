@@ -4,29 +4,34 @@ import * as actions from "../actions";
 import LatestItem from "./LatestItem";
 import _ from "lodash";
 
-const showPage = (pr) => {
-  return <table>
-      <thead>
-      <tr>
-        <td>Page Number</td>
-        <td>First Page</td>
-        <td>Last Page</td>
-        <td>Last page number</td>
-        <td>Page size</td>
-        <td>Total Items</td>
-      </tr>
-      </thead>
-      <tbody>
-      <tr>
-        <td>{pr.currentPageNumber}</td>
-        <td>{pr.isFirstPage? "Yes": "No"}</td>
-        <td>{pr.isLastPage? "Yes" : "NO"}</td>
-        <td>{pr.lastPageNumber}</td>
-        <td>{pr.pageSize}</td>
-        <td>{pr.totalItems}</td>
-      </tr>
-      </tbody>
-    </table>
+const previousPage = (pr, fetchDailyDeals) => {
+  if (pr.isFirstPage) {
+    return;
+  }
+
+  fetchDailyDeals(Number(pr.currentPageNumber) - 1);
+};
+
+const nextPage = (pr, fetchDailyDeals) => {
+  if (pr.isLastPage) {
+    return;
+  }
+
+  fetchDailyDeals(Number(pr.currentPageNumber) + 1);
+};
+
+const showPage = (pr, fetchDailyDeals) => {
+  return <ul className="right pagination">
+    <li className={pr.isFirstPage ? "disabled" : "waves-effect"}>
+      <a onClick={() => previousPage(pr, fetchDailyDeals)}><i className="material-icons">chevron_left</i></a>
+    </li>
+    <li className="active"><a>{pr.currentPageNumber}</a></li>
+    <li className="inactive"><a>...</a></li>
+    <li className="inactive"><a>{pr.lastPageNumber}</a></li>
+    <li className={pr.isLastPage ? "disabled" : "waves-effect"}>
+      <a onClick={() => nextPage(pr, fetchDailyDeals)}><i className="material-icons">chevron_right</i></a>
+    </li>
+  </ul>
 };
 
 const showLatest = (p) => {
@@ -39,19 +44,18 @@ class DailyDeals extends Component {
   }
 
   render() {
-    const {data, isLoading} = this.props;
+    const { data, isLoading } = this.props;
 
     return <div>
-      <h5>Daily Deals</h5>
+      <div className="row">
+        <h5 className="left">Daily Deals</h5>
+        {data && data.pageResponse ? showPage(data.pageResponse, this.props.fetchDailyDeals) : undefined}
+      </div>
 
       <div className="row">
         {isLoading ? <div className="progress">
           <div className="indeterminate"/>
         </div> : undefined}
-      </div>
-
-      <div className="row">
-        {data && data.pageResponse ? showPage(data.pageResponse) : undefined}
       </div>
 
       <div className="row">
@@ -70,6 +74,6 @@ function mapStateToProps({ error, data }) {
 }
 
 export default connect(
-  mapStateToProps,
-  actions
+    mapStateToProps,
+    actions
 )(DailyDeals);
