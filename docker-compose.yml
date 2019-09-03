@@ -1,0 +1,99 @@
+version: "3.7"
+
+services:
+
+  rabbit:
+    image: rabbitmq:3.7.14-management-alpine
+    hostname: rabbit
+    restart: on-failure
+    environment:
+      - RABBITMQ_DEFAULT_USER=trak
+      - RABBITMQ_DEFAULT_PASS=password
+      - RABBITMQ_DEFAULT_VHOST=/
+    ports:
+      - 5672
+      - 15672:15672
+    volumes:
+      - rabbit-data:/var/lib/rabbitmq
+
+  redis:
+    image: redis:5.0.4-alpine
+    command: redis-server --requirepass password
+    restart: on-failure
+    ports:
+      - 6379
+    volumes:
+      - redis-data:/data
+
+  rds:
+    image: mariadb:10.3.14
+    restart: on-failure
+    ports:
+      - 3306
+    volumes:
+      - rds-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=trak
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+
+  api:
+    restart: on-failure
+    image: benjaminslabbert/trak_api:1.0.4-2019-09-03
+    ports:
+      - 50051
+    environment:
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JAVA_OPTS=-Xmx64m -Xms64m -XX:+TieredCompilation -Xss256k -Xverify:none -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+CMSClassUnloadingEnabled -XshowSettings:vm -XX:NativeMemoryTracking=summary -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics -XX:+HeapDumpOnOutOfMemoryError -noverify
+
+  engine:
+    restart: on-failure
+    image: benjaminslabbert/trak_engine:1.0.4-2019-09-03
+    environment:
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JAVA_OPTS=-Xmx64m -Xms64m -XX:+TieredCompilation -Xss256k -Xverify:none -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+CMSClassUnloadingEnabled -XshowSettings:vm -XX:NativeMemoryTracking=summary -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics -XX:+HeapDumpOnOutOfMemoryError -noverify
+
+  worker-1:
+    restart: on-failure
+    image: benjaminslabbert/trak_worker:1.0.4-2019-09-03
+    environment:
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JAVA_OPTS=-Xmx128m -Xms128m -XX:+TieredCompilation -Xss256k -Xverify:none -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+CMSClassUnloadingEnabled -XshowSettings:vm -XX:NativeMemoryTracking=summary -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics -XX:+HeapDumpOnOutOfMemoryError -noverify
+
+  worker-2:
+    restart: on-failure
+    image: benjaminslabbert/trak_worker:1.0.4-2019-09-03
+    environment:
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JAVA_OPTS=-Xmx128m -Xms128m -XX:+TieredCompilation -Xss256k -Xverify:none -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+CMSClassUnloadingEnabled -XshowSettings:vm -XX:NativeMemoryTracking=summary -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics -XX:+HeapDumpOnOutOfMemoryError -noverify
+
+  search:
+    image: benjaminslabbert/trak_search:1.0.4-2019-09-03
+    ports:
+      - 50052
+    environment:
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=password
+      - JAVA_OPTS=-Xmx64m -Xms64m -XX:+TieredCompilation -Xss256k -Xverify:none -XX:+UseG1GC -XX:+UseStringDeduplication -XX:+CMSClassUnloadingEnabled -XshowSettings:vm -XX:NativeMemoryTracking=summary -XX:+UnlockDiagnosticVMOptions -XX:+PrintNMTStatistics -XX:+HeapDumpOnOutOfMemoryError -noverify
+
+  gateway:
+    restart: on-failure
+    image: benjaminslabbert/trak_gateway:1.0.1-2019-09-03_10-01-10
+    environment:
+      - API_GRPC_HOST=api:50051
+      - SEARCH_GRPC_HOST=search:50052
+    ports:
+      - 5000:5000
+
+volumes:
+  rabbit-data:
+    driver: local
+  rds-data:
+    driver: local
+  redis-data:
+    driver: local

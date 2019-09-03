@@ -1,4 +1,5 @@
 import "./styles/index.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import "chart.js";
 
 import React from "react";
@@ -7,7 +8,8 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { applyMiddleware, createStore } from "redux";
 import reduxThunk from "redux-thunk";
-import reducers from "./reducers";
+import { ToastContainer } from "react-toastify";
+import reducers from "./redux/reducers";
 
 import registerServiceWorker from "./registerServiceWorker";
 
@@ -19,7 +21,8 @@ const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 ReactDOM.render(
   <Provider store={store}>
     <ErrorBoundary>
-      <App/>
+      <App />
+      <ToastContainer />
     </ErrorBoundary>
   </Provider>,
   document.querySelector("#root")

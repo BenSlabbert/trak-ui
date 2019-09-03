@@ -1,25 +1,27 @@
 import React, { Component } from "react";
-import _ from "lodash";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import LatestItem from "./LatestItem";
-import * as actions from "../redux/actions";
+import _ from "lodash";
+import * as actions from "../../redux/actions";
+import LatestItem from "../LatestItem";
+import Carousel from "../pagination/Carousel";
 
 const showLatest = (p) => _.map(p, (l) => <LatestItem key={l.productUrl} item={l} />);
 
-const hasLatest = (d) => d && d.latest && d.latest.products;
-
-class Latest extends Component {
+class DailyDeals extends Component {
   componentDidMount() {
-    this.props.fetchLatestProducts();
+    this.props.fetchDailyDeals();
   }
 
   render() {
-    const { data, isLoading } = this.props;
+    const { data, isLoading, fetchDailyDeals } = this.props;
 
     return (
       <div>
-        <h5>Latest Products</h5>
+        <div className="row">
+          <h5 className="left">Daily Deals</h5>
+          {data && data.pageResponse ? <Carousel getPage={fetchDailyDeals} pr={data.pageResponse} /> : undefined}
+        </div>
 
         <div className="row">
           {isLoading ? (
@@ -30,23 +32,24 @@ class Latest extends Component {
         </div>
 
         <div className="row">
-          {hasLatest(data) ? showLatest(data.latest.products) : undefined}
+          {data && data.products ? showLatest(data.products) : undefined}
         </div>
       </div>
     );
   }
 }
 
-Latest.propTypes = {
-  fetchLatestProducts: PropTypes.func.isRequired,
+DailyDeals.propTypes = {
+  fetchDailyDeals: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  data: PropTypes.object,
   err: PropTypes.object
 };
 
 function mapStateToProps({ error, data }) {
   return {
+    data: data && data.dailyDeals ? data.dailyDeals : undefined,
     err: error,
-    data,
     isLoading: data && data.isLoading ? data.isLoading : false
   };
 }
@@ -54,4 +57,4 @@ function mapStateToProps({ error, data }) {
 export default connect(
   mapStateToProps,
   actions
-)(Latest);
+)(DailyDeals);

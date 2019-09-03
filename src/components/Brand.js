@@ -1,36 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../actions";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import _ from "lodash";
+import * as actions from "../redux/actions";
 import LatestItem from "./LatestItem";
 
 class Brand extends Component {
   componentDidMount() {
     const { match, fetchBrand } = this.props;
-    let brandId = match.params.brandId;
+    const { brandId } = match.params;
     fetchBrand(brandId);
   }
 
   render() {
     const { history, brand } = this.props;
 
-    return <div>
-      <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
+    return (
+      <div>
+        <h3>
+Brand:
+          {brand && brand.name ? brand.name : undefined}
+        </h3>
 
-      <div className="row">
-        {brand && brand.products
-            ? _.map(brand.products, l => (
-                <LatestItem key={l.productUrl} item={l}/>
+        <div className="row">
+          {brand && brand.products
+            ? _.map(brand.products, (l) => (
+              <LatestItem key={l.productUrl} item={l} />
             ))
             : undefined}
-      </div>
+        </div>
 
-      <button onClick={() => history.goBack()} className="btn">
-        back
-      </button>
-    </div>;
+        <button onClick={() => history.goBack()} className="btn">
+            back
+        </button>
+      </div>
+    );
   }
 }
 

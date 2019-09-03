@@ -1,8 +1,4 @@
-import {
-  AUTH_ERROR,
-  CLIENT_ERROR,
-  SERVER_ERROR
-} from "../actions/error/errorTypes";
+import { AUTH_ERROR, CLIENT_ERROR, SERVER_ERROR } from "../redux/actions/error/errorTypes";
 
 export const apiActionExceptionHandler = (e, dispatch = null) => {
   let resp1;

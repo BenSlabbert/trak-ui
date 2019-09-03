@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import * as actions from "../redux/actions";
 
 class ErrorBoundary extends Component {
   state = { hasError: false };
@@ -17,18 +17,22 @@ class ErrorBoundary extends Component {
     const { hasError } = this.state;
 
     // todo display error
-    console.log(err);
+    if (err) {
+      console.log(err);
+    }
 
     if (hasError) {
-      return <div className="container">
+      return (
         <div className="container">
-          <h6>We ran into an error!</h6>
+          <div className="container">
+            <h6>We ran into an error!</h6>
 
-          <button className="btn" onClick={() => (window.location = "/hex")}>
-            Take me Home
-          </button>
+            <button className="btn" onClick={() => (window.location = "/hex")}>
+                Take me Home
+            </button>
+          </div>
         </div>
-      </div>;
+      );
     }
 
     return this.props.children;

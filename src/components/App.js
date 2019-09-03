@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as actions from "../actions";
+import * as actions from "../redux/actions";
 import Latest from "./Latest";
 import Product from "./Product";
 import Search from "./Search";
-import DailyDeals from "./DailyDeals";
+import DailyDeals from "./deals/DailyDeals";
 import Brand from "./Brand";
 import Category from "./Category";
+import AllDeals from "./deals/AllDeals";
+import Deal from "./deals/Deal";
 
 class App extends Component {
   componentDidMount() {
@@ -18,64 +20,83 @@ class App extends Component {
   render() {
     const { history, match } = this.props;
 
-    return <BrowserRouter>
-      <div className="container">
-        <nav>
-          <div className="nav-wrapper">
-            <div className="brand-logo left">
-              <Link to="/">Trak</Link>
+    return (
+      <BrowserRouter>
+        <div className="container">
+          <nav>
+            <div className="nav-wrapper">
+              <div className="brand-logo left">
+                <Link to="/">Trak</Link>
+              </div>
+              <ul id="nav-mobile" className="right hide-on-med-and-down">
+                <li>
+                  <Link className="right" to="/search">
+                      Search
+                  </Link>
+                  <Link className="right" to="/daily-deals">
+                      Daily Deals
+                  </Link>
+                  <Link className="right" to="/all-deals">
+                      All Deals
+                  </Link>
+                </li>
+              </ul>
             </div>
+          </nav>
 
-            <ul id="nav-mobile" className="right hide-on-med-and-down">
-              <li>
-                <Link className="right" to="/search">
-                  Search
-                </Link>
-                <Link className="right" to="/daily-deals">
-                  Daily Deals
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          <Route exact path="/" component={Latest} />
+          <Route exact path="/search" history={history} component={Search} />
+          <Route
+            exact
+            path="/daily-deals"
+            history={history}
+            component={DailyDeals}
+          />
+          <Route
+            exact
+            path="/all-deals"
+            history={history}
+            component={AllDeals}
+          />
 
-        <Route exact path="/" component={Latest}/>
+          <Route
+            exact
+            path="/all-deals/:dealId"
+            history={history}
+            component={Deal}
+          />
 
-        <Route exact path="/search" history={history} component={Search}/>
-
-        <Route exact path="/daily-deals" history={history} component={DailyDeals}/>
-
-        <Route
+          <Route
             exact
             path="/product/:productId"
             match={match}
             history={history}
             component={Product}
-        />
+          />
 
-        <Route
+          <Route
             exact
             path="/brand/:brandId"
             match={match}
             history={history}
             component={Brand}
-        />
+          />
 
-        <Route
+          <Route
             exact
             path="/category/:categoryId"
             match={match}
             history={history}
             component={Category}
-        />
-      </div>
-    </BrowserRouter>;
+          />
+        </div>
+      </BrowserRouter>
+    );
   }
 }
 
 App.propTypes = {
   fetchLatestProducts: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
   err: PropTypes.object
 };
 

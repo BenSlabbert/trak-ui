@@ -1,14 +1,17 @@
 import axios from "axios";
-import { apiActionExceptionHandler } from "../../util/apiActionExceptionHandler";
-import { clearAllErrors } from "../index";
-import { SEARCH_PRODUCTS, SEARCH_LOADING, SEARCH_BRANDS, SEARCH_CATEGORIES } from "./searchTypes";
+import { apiActionExceptionHandler } from "../../../util/apiActionExceptionHandler";
+import { clearAllErrors } from "../error/errorActions";
+import {
+  SEARCH_BRANDS,
+  SEARCH_CATEGORIES,
+  SEARCH_LOADING,
+  SEARCH_PRODUCTS
+} from "./searchTypes";
 import { DATA_LOADING } from "../data/dataTypes";
 
-export const searchLoadingStop = () => {
-  return { type: DATA_LOADING, payload: false };
-};
+export const searchLoadingStop = () => ({ type: DATA_LOADING, payload: false });
 
-export const fetchSearchProducts = (search = null) => async dispatch => {
+export const fetchSearchProducts = (search = null) => async (dispatch) => {
   dispatch(clearAllErrors());
 
   if (!search) {
@@ -26,7 +29,7 @@ export const fetchSearchProducts = (search = null) => async dispatch => {
   }
 };
 
-export const fetchSearchBrands = (search = null) => async dispatch => {
+export const fetchSearchBrands = (search = null) => async (dispatch) => {
   dispatch(clearAllErrors());
 
   if (!search) {
@@ -44,7 +47,7 @@ export const fetchSearchBrands = (search = null) => async dispatch => {
   }
 };
 
-export const fetchSearchCategories = (search = null) => async dispatch => {
+export const fetchSearchCategories = (search = null) => async (dispatch) => {
   dispatch(clearAllErrors());
 
   if (!search) {

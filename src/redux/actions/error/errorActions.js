@@ -1,15 +1,11 @@
 import axios from "axios";
 import { CLEAR_ERRORS, ERROR_LOADING, REPORT_APP_ERROR } from "./errorTypes";
 
-export const errorLoadingStop = () => {
-  return { type: ERROR_LOADING, payload: false };
-};
+export const errorLoadingStop = () => ({ type: ERROR_LOADING, payload: false });
 
-export const clearAllErrors = () => {
-  return { type: CLEAR_ERRORS, payload: null };
-};
+export const clearAllErrors = () => ({ type: CLEAR_ERRORS, payload: null });
 
-export const reportError = (error) => async dispatch => {
+export const reportError = (error) => async (dispatch) => {
   dispatch({ type: ERROR_LOADING, payload: true });
 
   try {
