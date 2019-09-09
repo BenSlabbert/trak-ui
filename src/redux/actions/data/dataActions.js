@@ -137,7 +137,7 @@ export const fetchAllDeals = (page = 1) => async (dispatch) => {
   }
 };
 
-export const fetchDeal = (id = null, page = 1) => async (dispatch) => {
+export const fetchDeal = (page = 1, id = null) => async (dispatch) => {
   dispatch(clearAllErrors());
   dispatch({
     type: DATA_LOADING,
