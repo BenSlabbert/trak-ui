@@ -10,18 +10,16 @@ import TextInput from "./forms/TextInput";
 
 const showName = (n) => (n.length > 60 ? `${n.substring(0, 60)}...` : n);
 
-class Search extends Component {
-  renderFields(FORM_FIELDS) {
-    return _.map(FORM_FIELDS, (field) => (
-      <Field
-        className="input-field"
-        key={field.name}
-        component={TextInput}
-        {...field}
-      />
-    ));
-  }
+const renderFields = () => _.map(FORM_FIELDS, (field) => (
+  <Field
+    className="input-field"
+    key={field.name}
+    component={TextInput}
+    {...field}
+  />
+));
 
+class Search extends Component {
   searchProduct() {
     const {
       searchForm,
@@ -55,7 +53,7 @@ class Search extends Component {
 
               <h5>Search</h5>
 
-              <div className="col s9 m9 l9">{this.renderFields(FORM_FIELDS)}</div>
+              <div className="col s9 m9 l9">{renderFields()}</div>
 
               <div className="col s3 m3 l3">
                 <button
@@ -63,36 +61,36 @@ class Search extends Component {
                   className="teal btn-flat right white-text"
                   type="submit"
                 >
-                    search
+                  search
                 </button>
               </div>
             </div>
 
             <div className="row">
               <div className="col 4s 4m 4l">
-                {<div>
-                  <h6>Products</h6>
-                  {_.map(search.searchProducts.results, (l) => (
-                    <div key={l.id}>
-                      <Link to={`/product/${l.id}`}>{showName(l.name)}</Link>
-                    </div>
-                  ))}
-                </div>}
+                {
+                  <div>
+                    <h6>Products</h6>
+                    {_.map(search.searchProducts.results, (l) => (
+                      <div key={l.id}>
+                        <Link to={`/product/${l.id}`}>{showName(l.name)}</Link>
+                      </div>
+                    ))}
+                  </div>
+                }
               </div>
 
               <div className="col 4s 4m 4l">
                 {search && search.searchBrands ? (
                   <div>
                     <h6>Brands</h6>
-                    {_.map(search.sesarchBrands.results, (l) => (
+                    {_.map(search.searchBrands.results, (l) => (
                       <div key={l.id}>
                         <Link to={`/brand/${l.id}`}>{showName(l.name)}</Link>
                       </div>
                     ))}
                   </div>
-                ) : (
-                  undefined
-                )}
+                ) : undefined}
               </div>
 
               <div className="col 4s 4m 4l">
@@ -105,15 +103,13 @@ class Search extends Component {
                       </div>
                     ))}
                   </div>
-                ) : (
-                  undefined
-                )}
+                ) : undefined}
               </div>
             </div>
           </form>
 
-          <button onClick={() => history.goBack()} className="btn">
-              back
+          <button type="button" onClick={() => history.goBack()} className="btn">
+            back
           </button>
         </div>
       );
@@ -126,13 +122,11 @@ class Search extends Component {
               <div className="progress">
                 <div className="indeterminate" />
               </div>
-            ) : (
-              undefined
-            )}
+            ) : undefined}
 
             <h5>Search</h5>
 
-            <div className="col s9 m9 l9">{this.renderFields(FORM_FIELDS)}</div>
+            <div className="col s9 m9 l9">{renderFields()}</div>
 
             <div className="col s3 m3 l3">
               <button
@@ -140,21 +134,19 @@ class Search extends Component {
                 className="teal btn-flat right white-text"
                 type="submit"
               >
-                  search
+                search
               </button>
             </div>
           </div>
 
           <div className="row">
-            <div className="col 4s 4m 4l">
-              {undefined}
-            </div>
+            <div className="col 4s 4m 4l">{undefined}</div>
 
             <div className="col 4s 4m 4l">
               {search && search.searchBrands ? (
                 <div>
                   <h6>Brands</h6>
-                  {_.map(search.sesarchBrands.results, (l) => (
+                  {_.map(search.searchBrands.results, (l) => (
                     <div key={l.id}>
                       <Link to={`/brand/${l.id}`}>{showName(l.name)}</Link>
                     </div>
@@ -173,13 +165,15 @@ class Search extends Component {
                     </div>
                   ))}
                 </div>
-              ) : undefined}
+              ) : (
+                undefined
+              )}
             </div>
           </div>
         </form>
 
-        <button onClick={() => history.goBack()} className="btn">
-            back
+        <button type="button" onClick={() => history.goBack()} className="btn">
+          back
         </button>
       </div>
     );
