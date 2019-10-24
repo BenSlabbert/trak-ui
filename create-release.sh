@@ -3,7 +3,7 @@
 # Run this manually
 
 # Tag code
-TAG=v1.1.4
+TAG=v1.1.7
 GITHUB_USER=BenSlabbert
 # ENV VAR: $GITHUB_PASS
 
