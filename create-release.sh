@@ -2,13 +2,18 @@
 
 # Run this manually
 
-# Tag code
-TAG=v1.1.7
-GITHUB_USER=BenSlabbert
-# ENV VAR: $GITHUB_PASS
+# export GH_TOKEN
+# export TAG
 
-git tag -a $TAG -m "Test release"
-git push https://$GITHUB_USER:"$GITHUB_PASS"@github.com/BenSlabbert/trak-ui.git --tags
+: "${GH_TOKEN:?"Need to set GH_TOKEN"}"
+: "${TAG:?"Need to set TAG"}"
+
+GITHUB_PASS=$GITHUB_PASS
+GITHUB_USER=$GITHUB_USER
+TAG=$TAG
+
+git tag -a "$TAG" -m "Test release"
+git push --tags
 
 #build bundle
 yarn build
@@ -39,9 +44,9 @@ STATUSCODE=$(curl --silent --output /dev/stderr --write-out "%{http_code}" \
   -H 'Host: api.github.com' \
   -H 'cache-control: no-cache' \
   -d '{
-  "tag_name": "'$TAG'",
+  "tag_name": "'"$TAG"'",
   "target_commitish": "master",
-  "name": "'$TAG'",
+  "name": "'"$TAG"'",
   "body": "Description of the release",
   "draft": false,
   "prerelease": false
@@ -59,15 +64,16 @@ response=$(curl "$GH_TAGS")
 # Get ID of the asset based on given filename.
 eval "$(echo "$response" | grep -m 1 "id.:" | grep -w id | tr : = | tr -cd '[[:alnum:]]=')"
 
-[ "$id" ] || { echo "Error: Failed to get release id for tag: $TAG"; echo "$response" | awk 'length($0)<100' >&2; exit 1; }
+RELEASE_ID=$id
+[ "$RELEASE_ID" ] || { echo "Error: Failed to get release id for tag: $TAG"; echo "$response" | awk 'length($0)<100' >&2; exit 1; }
 
-echo "Release ID: $id"
+echo "Release ID: $RELEASE_ID"
 
 # Upload asset
 echo "Uploading asset... "
 
 # Construct url
-GH_ASSET="https://uploads.github.com/repos/$OWNER/$REPO/releases/$id/assets?name=ui.zip"
+GH_ASSET="https://uploads.github.com/repos/$OWNER/$REPO/releases/$RELEASE_ID/assets?name=ui.zip"
 
 curl "$GITHUB_OAUTH_BASIC" --data-binary @"$UPLOAD_FILE_PATH" -H "Authorization: token $GH_TOKEN" -H "Content-Type: application/octet-stream" "$GH_ASSET"
 
