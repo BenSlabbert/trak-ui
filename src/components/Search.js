@@ -165,9 +165,7 @@ class Search extends Component {
                     </div>
                   ))}
                 </div>
-              ) : (
-                undefined
-              )}
+              ) : undefined}
             </div>
           </div>
         </form>

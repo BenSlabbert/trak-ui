@@ -11,6 +11,7 @@ import Brand from "./Brand";
 import Category from "./Category";
 import AllDeals from "./deals/AllDeals";
 import Deal from "./deals/Deal";
+import AddProduct from "./AddProduct";
 
 class App extends Component {
   componentDidMount() {
@@ -30,6 +31,9 @@ class App extends Component {
               </div>
               <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <li>
+                  <Link className="right" to="/add">
+                      Add
+                  </Link>
                   <Link className="right" to="/search">
                       Search
                   </Link>
@@ -45,6 +49,7 @@ class App extends Component {
           </nav>
 
           <Route exact path="/" component={Latest} />
+          <Route exact path="/add" history={history} component={AddProduct} />
           <Route exact path="/search" history={history} component={Search} />
           <Route
             exact

@@ -6,7 +6,8 @@ import {
   DATA_FETCH_DEAL_BY_ID,
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
-  DATA_LOADING
+  DATA_LOADING,
+  DATA_ADD_PRODUCT
 } from "../actions/data/dataTypes";
 
 export default function (state = null, action) {
@@ -31,6 +32,9 @@ export default function (state = null, action) {
 
     case DATA_FETCH_DEAL_BY_ID:
       return { deal: action.payload, isLoading: false };
+
+    case DATA_ADD_PRODUCT:
+      return { addProduct: action.payload, isLoading: false };
 
     case DATA_LOADING:
       return { isLoading: action.payload };

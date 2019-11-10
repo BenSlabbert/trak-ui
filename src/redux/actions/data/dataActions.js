@@ -9,7 +9,8 @@ import {
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
   DATA_LOADING,
-  DATA_FETCH_DEAL_BY_ID
+  DATA_FETCH_DEAL_BY_ID,
+  DATA_ADD_PRODUCT
 } from "./dataTypes";
 
 export const dataLoadingStop = () => ({
@@ -150,6 +151,27 @@ export const fetchDeal = (page = 1, id = null) => async (dispatch) => {
     const res = await axios.get(`/api/promotion?id=${id}&page=${page}`);
     dispatch({
       type: DATA_FETCH_DEAL_BY_ID,
+      payload: res.data
+    });
+  } catch (e) {
+    dispatch(dataLoadingStop());
+    apiActionExceptionHandler(e, dispatch);
+  }
+};
+
+export const addProduct = (url = null) => async (dispatch) => {
+  dispatch(clearAllErrors());
+  dispatch({
+    type: DATA_LOADING,
+    payload: true
+  });
+
+  if (!url) throw Error("Missing url!");
+
+  try {
+    const res = await axios.get(`/api/add-product?url=${url}`);
+    dispatch({
+      type: DATA_ADD_PRODUCT,
       payload: res.data
     });
   } catch (e) {

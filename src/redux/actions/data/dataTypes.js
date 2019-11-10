@@ -6,3 +6,4 @@ export const DATA_FETCH_CATEGORY = "data_fetch_category";
 export const DATA_FETCH_DAILY_DEALS = "data_fetch_daily_deals";
 export const DATA_FETCH_ALL_DEALS = "data_fetch_all_deals";
 export const DATA_FETCH_DEAL_BY_ID = "data_fetch_deal_by_id";
+export const DATA_ADD_PRODUCT = "data_add_product";
