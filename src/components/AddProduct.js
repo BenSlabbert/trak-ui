@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Field, reduxForm } from "redux-form";
-import { ADD_PRODUCT_FORM } from "../util/forms";
-import { connect } from "react-redux";
-import * as actions from "../redux/actions";
+import { toast } from "react-toastify";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { ADD_PRODUCT_FORM } from "../util/forms";
+import * as actions from "../redux/actions";
 import FORM_FIELDS from "./addProductFormFields";
 import TextInput from "./forms/TextInput";
 
@@ -20,20 +21,25 @@ class AddProduct extends Component {
   addProduct() {
     const {
       addProductForm,
-      addProduct
+      addProduct,
+      history
     } = this.props;
 
     if (addProductForm && addProductForm.values && addProductForm.values.url) {
-      addProduct(addProductForm.values.url);
+      addProduct(addProductForm.values.url, history);
     }
   }
 
+  notifyInfo = (msg) => toast.info(msg, { position: "top-center" });
+
   render() {
     const {
-      handleSubmit, addProduct, history, isLoading
+      handleSubmit, addProductResp, history, isLoading
     } = this.props;
 
-    console.log('addProduct', addProduct);
+    if (addProductResp) {
+      this.notifyInfo("Successfully added product!");
+    }
 
     return (
       <div>
@@ -73,7 +79,7 @@ function mapStateToProps({ error, form, data }) {
   const addProductForm = form[ADD_PRODUCT_FORM];
 
   return {
-    addProduct: data && data.addProduct ? data.addProduct : null,
+    addProductResp: data && data.addProductResp ? data.addProductResp : null,
     err: error,
     isLoading: data && data.isLoading,
     addProductForm: addProductForm || null

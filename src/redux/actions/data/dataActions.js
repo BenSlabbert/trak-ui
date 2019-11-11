@@ -159,7 +159,7 @@ export const fetchDeal = (page = 1, id = null) => async (dispatch) => {
   }
 };
 
-export const addProduct = (url = null) => async (dispatch) => {
+export const addProduct = (url = null, history = null) => async (dispatch) => {
   dispatch(clearAllErrors());
   dispatch({
     type: DATA_LOADING,
@@ -167,6 +167,7 @@ export const addProduct = (url = null) => async (dispatch) => {
   });
 
   if (!url) throw Error("Missing url!");
+  if (!history) throw Error("Missing history!");
 
   try {
     const res = await axios.get(`/api/add-product?url=${url}`);
@@ -174,6 +175,7 @@ export const addProduct = (url = null) => async (dispatch) => {
       type: DATA_ADD_PRODUCT,
       payload: res.data
     });
+    history.push('/');
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);

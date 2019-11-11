@@ -34,7 +34,7 @@ export default function (state = null, action) {
       return { deal: action.payload, isLoading: false };
 
     case DATA_ADD_PRODUCT:
-      return { addProduct: action.payload, isLoading: false };
+      return { addProductResp: action.payload, isLoading: false };
 
     case DATA_LOADING:
       return { isLoading: action.payload };
