@@ -24,8 +24,8 @@ Brand:
         </h3>
 
         <div className="row">
-          {brand && brand.products
-            ? _.map(brand.products, (l) => (
+          {brand && brand.productsList
+            ? _.map(brand.productsList, (l) => (
               <LatestItem key={l.productUrl} item={l} />
             ))
             : undefined}

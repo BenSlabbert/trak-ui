@@ -1,17 +1,19 @@
 import axios from "axios";
+import pb from "trak-gRPC/gen/js/proto/gateway/gateway_api_pb";
 import { apiActionExceptionHandler } from "../../../util/apiActionExceptionHandler";
 import { clearAllErrors } from "../error/errorActions";
 import {
+  DATA_ADD_PRODUCT,
   DATA_FETCH_ALL_DEALS,
   DATA_FETCH_BRAND,
   DATA_FETCH_CATEGORY,
   DATA_FETCH_DAILY_DEALS,
+  DATA_FETCH_DEAL_BY_ID,
   DATA_FETCH_LATEST_PRODUCTS,
   DATA_FETCH_PRODUCT,
-  DATA_LOADING,
-  DATA_FETCH_DEAL_BY_ID,
-  DATA_ADD_PRODUCT
+  DATA_LOADING
 } from "./dataTypes";
+import { BinaryRequestConfig, dispatchProto } from "../util";
 
 export const dataLoadingStop = () => ({
   type: DATA_LOADING,
@@ -26,11 +28,8 @@ export const fetchLatestProducts = () => async (dispatch) => {
   });
 
   try {
-    const res = await axios.get(`/api/latest`);
-    dispatch({
-      type: DATA_FETCH_LATEST_PRODUCTS,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/latest`, BinaryRequestConfig);
+    dispatchProto(pb.LatestResponse, res.data, dispatch, DATA_FETCH_LATEST_PRODUCTS);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -47,11 +46,8 @@ export const fetchProduct = (productId = null) => async (dispatch) => {
   if (!productId) throw Error("Missing productId!");
 
   try {
-    const res = await axios.get(`/api/product/${productId}`);
-    dispatch({
-      type: DATA_FETCH_PRODUCT,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/product/${productId}`, BinaryRequestConfig);
+    dispatchProto(pb.ProductResponse, res.data, dispatch, DATA_FETCH_PRODUCT);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -68,11 +64,8 @@ export const fetchBrand = (brandId = null) => async (dispatch) => {
   if (!brandId) throw Error("Missing brandId!");
 
   try {
-    const res = await axios.get(`/api/brand/${brandId}`);
-    dispatch({
-      type: DATA_FETCH_BRAND,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/brand/${brandId}`, BinaryRequestConfig);
+    dispatchProto(pb.BrandResponse, res.data, dispatch, DATA_FETCH_BRAND);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -89,11 +82,8 @@ export const fetchCategory = (categoryId = null) => async (dispatch) => {
   if (!categoryId) throw Error("Missing categoryId!");
 
   try {
-    const res = await axios.get(`/api/category/${categoryId}`);
-    dispatch({
-      type: DATA_FETCH_CATEGORY,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/category/${categoryId}`, BinaryRequestConfig);
+    dispatchProto(pb.CategoryResponse, res.data, dispatch, DATA_FETCH_CATEGORY);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -108,11 +98,8 @@ export const fetchDailyDeals = (page = 1) => async (dispatch) => {
   });
 
   try {
-    const res = await axios.get(`/api/daily-deals?page=${page}`);
-    dispatch({
-      type: DATA_FETCH_DAILY_DEALS,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/daily-deals?page=${page}`, BinaryRequestConfig);
+    dispatchProto(pb.PromotionResponse, res.data, dispatch, DATA_FETCH_DAILY_DEALS);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -127,11 +114,8 @@ export const fetchAllDeals = (page = 1) => async (dispatch) => {
   });
 
   try {
-    const res = await axios.get(`/api/all-promotions?page=${page}`);
-    dispatch({
-      type: DATA_FETCH_ALL_DEALS,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/all-promotions?page=${page}`, BinaryRequestConfig);
+    dispatchProto(pb.GetAllPromotionsResponse, res.data, dispatch, DATA_FETCH_ALL_DEALS);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -148,11 +132,8 @@ export const fetchDeal = (page = 1, id = null) => async (dispatch) => {
   if (!id) throw Error("Missing promotionId!");
 
   try {
-    const res = await axios.get(`/api/promotion?id=${id}&page=${page}`);
-    dispatch({
-      type: DATA_FETCH_DEAL_BY_ID,
-      payload: res.data
-    });
+    const res = await axios.get(`/api/promotion?id=${id}&page=${page}`, BinaryRequestConfig);
+    dispatchProto(pb.PromotionResponse, res.data, dispatch, DATA_FETCH_DEAL_BY_ID);
   } catch (e) {
     dispatch(dataLoadingStop());
     apiActionExceptionHandler(e, dispatch);

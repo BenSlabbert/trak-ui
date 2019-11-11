@@ -27,8 +27,8 @@ class Category extends Component {
         </h3>
 
         <div className="row">
-          {category && category.products
-            ? showLatest(category.products)
+          {category && category.productsList
+            ? showLatest(category.productsList)
             : undefined}
         </div>
 

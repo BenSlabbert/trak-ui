@@ -71,9 +71,9 @@ class Search extends Component {
                 {
                   <div>
                     <h6>Products</h6>
-                    {_.map(search.searchProducts.results, (l) => (
+                    {_.map(search.searchProducts.resultsList, (l) => (
                       <div key={l.id}>
-                        <Link to={`/product/${l.id}`}>{showName(l.name)}</Link>
+                        <Link to={`/product/${l.id}`}>{showName(l.text)}</Link>
                       </div>
                     ))}
                   </div>
@@ -84,9 +84,9 @@ class Search extends Component {
                 {search && search.searchBrands ? (
                   <div>
                     <h6>Brands</h6>
-                    {_.map(search.searchBrands.results, (l) => (
+                    {_.map(search.searchBrands.resultsList, (l) => (
                       <div key={l.id}>
-                        <Link to={`/brand/${l.id}`}>{showName(l.name)}</Link>
+                        <Link to={`/brand/${l.id}`}>{showName(l.text)}</Link>
                       </div>
                     ))}
                   </div>
@@ -97,9 +97,9 @@ class Search extends Component {
                 {search && search.searchCategories ? (
                   <div>
                     <h6>Categories</h6>
-                    {_.map(search.searchCategories.results, (l) => (
+                    {_.map(search.searchCategories.resultsList, (l) => (
                       <div key={l.id}>
-                        <Link to={`/category/${l.id}`}>{showName(l.name)}</Link>
+                        <Link to={`/category/${l.id}`}>{showName(l.text)}</Link>
                       </div>
                     ))}
                   </div>
@@ -146,9 +146,9 @@ class Search extends Component {
               {search && search.searchBrands ? (
                 <div>
                   <h6>Brands</h6>
-                  {_.map(search.searchBrands.results, (l) => (
+                  {_.map(search.searchBrands.resultsList, (l) => (
                     <div key={l.id}>
-                      <Link to={`/brand/${l.id}`}>{showName(l.name)}</Link>
+                      <Link to={`/brand/${l.id}`}>{showName(l.text)}</Link>
                     </div>
                   ))}
                 </div>
@@ -159,9 +159,9 @@ class Search extends Component {
               {search && search.searchCategories ? (
                 <div>
                   <h6>Categories</h6>
-                  {_.map(search.searchCategories.results, (l) => (
+                  {_.map(search.searchCategories.resultsList, (l) => (
                     <div key={l.id}>
-                      <Link to={`/category/${l.id}`}>{showName(l.name)}</Link>
+                      <Link to={`/category/${l.id}`}>{showName(l.text)}</Link>
                     </div>
                   ))}
                 </div>

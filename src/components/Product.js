@@ -25,10 +25,7 @@ class Product extends Component {
           <div>
             <div className="row">
               <h3>{product.product.name}</h3>
-              <h6>
-Current Price:
-                {product.product.price}
-              </h6>
+              <h6>Current Price: {product.product.price}</h6>
             </div>
 
             <div className="row">
@@ -67,7 +64,7 @@ Current Price:
                     </tr>
                   </thead>
                   <tbody>
-                    {_.map(product.product.categories, (c) => (
+                    {_.map(product.product.categoriesList, (c) => (
                       <tr key={c.id}>
                         <td key={c.id}>
                             <Link to={`/category/${c.id}`}>{c.name}</Link>
@@ -101,11 +98,11 @@ Current Price:
             <div className="row col s12 m12 l12">
               <LineChart
                 data={{
-                  labels: product.stats.chartData.labels.slice(0, 5),
+                  labels: product.stats.chart.labelsList.slice(0, 5),
                   datasets: _.map(
-                    product.stats.chartData.dataSets.slice(0, 5),
+                    product.stats.chart.contentList.slice(0, 5),
                     (l) => ({
-                      data: l.dataList,
+                      data: l.contentList,
                       ...l
                     })
                   )

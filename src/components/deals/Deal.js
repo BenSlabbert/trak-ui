@@ -60,7 +60,7 @@ class Deal extends Component {
           ) : undefined}
         </div>
 
-        {deal && deal.products ? showProducts(deal.products) : null}
+        {deal && deal.productsList ? showProducts(deal.productsList) : null}
       </div>
     );
   }

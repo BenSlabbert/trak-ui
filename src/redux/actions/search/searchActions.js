@@ -1,4 +1,5 @@
 import axios from "axios";
+import pb from "trak-gRPC/gen/js/proto/search/search_api_pb";
 import { apiActionExceptionHandler } from "../../../util/apiActionExceptionHandler";
 import { clearAllErrors } from "../error/errorActions";
 import {
@@ -8,6 +9,7 @@ import {
   SEARCH_PRODUCTS
 } from "./searchTypes";
 import { DATA_LOADING } from "../data/dataTypes";
+import { BinaryRequestConfig, dispatchProto } from "../util";
 
 export const searchLoadingStop = () => ({ type: DATA_LOADING, payload: false });
 
@@ -21,8 +23,8 @@ export const fetchSearchProducts = (search = null) => async (dispatch) => {
   dispatch({ type: SEARCH_LOADING, payload: true });
 
   try {
-    const res = await axios.get(`/api/search/product?s=${search}`);
-    dispatch({ type: SEARCH_PRODUCTS, payload: res.data });
+    const res = await axios.get(`/api/search/product?s=${search}`, BinaryRequestConfig);
+    dispatchProto(pb.ProductSearchResponse, res.data, dispatch, SEARCH_PRODUCTS);
   } catch (e) {
     dispatch(searchLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -39,8 +41,8 @@ export const fetchSearchBrands = (search = null) => async (dispatch) => {
   dispatch({ type: SEARCH_LOADING, payload: true });
 
   try {
-    const res = await axios.get(`/api/search/brand?s=${search}`);
-    dispatch({ type: SEARCH_BRANDS, payload: res.data });
+    const res = await axios.get(`/api/search/brand?s=${search}`, BinaryRequestConfig);
+    dispatchProto(pb.BrandSearchResponse, res.data, dispatch, SEARCH_BRANDS);
   } catch (e) {
     dispatch(searchLoadingStop());
     apiActionExceptionHandler(e, dispatch);
@@ -57,8 +59,8 @@ export const fetchSearchCategories = (search = null) => async (dispatch) => {
   dispatch({ type: SEARCH_LOADING, payload: true });
 
   try {
-    const res = await axios.get(`/api/search/category?s=${search}`);
-    dispatch({ type: SEARCH_CATEGORIES, payload: res.data });
+    const res = await axios.get(`/api/search/category?s=${search}`, BinaryRequestConfig);
+    dispatchProto(pb.CategorySearchResponse, res.data, dispatch, SEARCH_CATEGORIES);
   } catch (e) {
     dispatch(searchLoadingStop());
     apiActionExceptionHandler(e, dispatch);

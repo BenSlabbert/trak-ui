@@ -54,8 +54,8 @@ class AllDeals extends Component {
               </tr>
             </thead>
             <tbody>
-              {data && data.promotions
-                ? data.promotions.map((p) => (
+              {data && data.promotionsList
+                ? data.promotionsList.map((p) => (
                   <tr key={p.id}>
                     <td>
                       <Link to={`/all-deals/${p.id}`}>{p.name}</Link>

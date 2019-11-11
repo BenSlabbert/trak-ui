@@ -11,6 +11,7 @@
     }
   },
   "dependencies": {
+    "google-protobuf": "^3.9.0",
     "axios": "^0.18.0",
     "chart.js": "^1.1.1",
     "lodash": "^4.17.15",
@@ -28,7 +29,8 @@
     "react-toastify": "^5.3.2",
     "redux": "^4.0.1",
     "redux-form": "^8.2.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC.git#de7047d794c43be7550057fc1ea6d16c9aec235e"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src/styles/ --include-path ./node_modules src/styles/ -o src/styles/",

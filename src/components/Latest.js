@@ -7,7 +7,7 @@ import * as actions from "../redux/actions";
 
 const showLatest = (p) => _.map(p, (l) => <LatestItem key={l.productUrl} item={l} />);
 
-const hasLatest = (d) => d && d.latest && d.latest.products;
+const hasLatest = (d) => d && d.latest && d.latest.productsList;
 
 class Latest extends Component {
   componentDidMount() {
@@ -30,7 +30,7 @@ class Latest extends Component {
         </div>
 
         <div className="row">
-          {hasLatest(data) ? showLatest(data.latest.products) : undefined}
+          {hasLatest(data) ? showLatest(data.latest.productsList) : undefined}
         </div>
       </div>
     );

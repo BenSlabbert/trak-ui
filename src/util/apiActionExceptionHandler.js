@@ -1,5 +1,6 @@
 import { AUTH_ERROR, CLIENT_ERROR, SERVER_ERROR } from "../redux/actions/error/errorTypes";
 
+// todo dispatch must handle the proto message here
 export const apiActionExceptionHandler = (e, dispatch = null) => {
   let resp1;
   let resp2;

@@ -32,7 +32,7 @@ class DailyDeals extends Component {
         </div>
 
         <div className="row">
-          {data && data.products ? showLatest(data.products) : undefined}
+          {data && data.productsList ? showLatest(data.productsList) : undefined}
         </div>
       </div>
     );
