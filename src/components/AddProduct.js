@@ -30,15 +30,22 @@ class AddProduct extends Component {
     }
   }
 
+  notifyError = (msg) => toast.error(msg, { position: "top-center" });
+
   notifyInfo = (msg) => toast.info(msg, { position: "top-center" });
 
   render() {
     const {
-      handleSubmit, addProductResp, history, isLoading
+      handleSubmit, err, addProductResp, history, isLoading
     } = this.props;
 
     if (addProductResp) {
       this.notifyInfo("Successfully added product!");
+    }
+
+    if (err) {
+      this.notifyError(err.message);
+      this.props.clearAllErrors();
     }
 
     return (
