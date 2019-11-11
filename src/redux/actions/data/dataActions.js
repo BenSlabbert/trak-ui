@@ -151,7 +151,16 @@ export const addProduct = (url = null, history = null) => async (dispatch) => {
   if (!history) throw Error("Missing history!");
 
   try {
-    const res = await axios.get(`/api/add-product?url=${url}`);
+    const addProductRequest = new pb.AddProductRequest();
+    addProductRequest.setUrl(url);
+    const binary = addProductRequest.serializeBinary();
+    const res = await axios.post(`/api/add-product?url=${url}`,
+      binary, {
+        headers: {
+          'Content-Type': `application/octet-stream`
+        },
+        timeout: 30000
+      });
     dispatch({
       type: DATA_ADD_PRODUCT,
       payload: res.data

@@ -30,7 +30,7 @@
     "redux": "^4.0.1",
     "redux-form": "^8.2.0",
     "redux-thunk": "^2.2.0",
-    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC.git#de7047d794c43be7550057fc1ea6d16c9aec235e"
+    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC.git#a426e326e3ee88284b8de98f1d6330441fdc142f"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src/styles/ --include-path ./node_modules src/styles/ -o src/styles/",
