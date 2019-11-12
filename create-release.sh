@@ -7,12 +7,14 @@
 
 : "${GH_TOKEN:?"Need to set GH_TOKEN"}"
 : "${TAG:?"Need to set TAG"}"
+: "${TAG_MESSAGE:?"Need to set TAG_MESSAGE"}"
 
 GITHUB_PASS=$GITHUB_PASS
 GITHUB_USER=$GITHUB_USER
 TAG=$TAG
+TAG_MESSAGE=$TAG_MESSAGE
 
-git tag -a "$TAG" -m "Test release"
+git tag -a "$TAG" -m "$TAG_MESSAGE"
 git push --tags
 
 #build bundle
