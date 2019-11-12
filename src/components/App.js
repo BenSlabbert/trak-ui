@@ -95,6 +95,38 @@ class App extends Component {
             component={Category}
           />
         </div>
+        <footer className="page-footer container">
+          <div className="row">
+            <div className="col l6 s12">
+              <h5 className="white-text">Trak is OpenSource!</h5>
+              <p className="grey-text text-lighten-4">
+                This project is inspired by: <a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://camelcamelcamel.com/">camelcamelcamel.com</a>
+              </p>
+            </div>
+            <div className="col l4 offset-l2 s12">
+              <h5 className="white-text">Links</h5>
+              <ul>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/BenSlabbert/trak-gateway">trak-gateway (Golang backend)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/BenSlabbert/trak-ui">trak-ui (ReactJS frontend)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/BenSlabbert/trak-gRPC">trak-grpc (data definitions)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/nsqio/nsq">nsq (queue)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/valeriansaliou/sonic">sonic (natural language search)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/mariadb">mariadb (relational database)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/RedisLabs">redis (cache)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/golang/protobuf">protobuf (message serialization)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/gorilla/mux">gorilla (http handler)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/jinzhu/gorm">gorm (relation db ORM)</a></li>
+                <li><a className="grey-text text-lighten-3" rel="noopener noreferrer" target="_blank" href="https://github.com/sirupsen/logrus">logrus (logging)</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="footer-copyright">
+            <div className="container">
+              © 2014 No Copyright Text Yet!
+              <a className="grey-text text-lighten-4 right" rel="noopener noreferrer" target="_blank" href="https://www.takealot.com">www.takealot.com</a>
+            </div>
+          </div>
+        </footer>
       </BrowserRouter>
     );
   }
