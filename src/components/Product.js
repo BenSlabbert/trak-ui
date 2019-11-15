@@ -15,11 +15,17 @@ class Product extends Component {
   }
 
   render() {
-    const { history, product } = this.props;
+    const { history, product, isLoading } = this.props;
 
     return (
       <div>
-        <div className="row" />
+        <div className="row">
+          {isLoading ? (
+            <div className="progress">
+              <div className="indeterminate" />
+            </div>
+          ) : undefined}
+        </div>
 
         {product && product.product ? (
           <div>
@@ -126,14 +132,15 @@ Product.propTypes = {
   history: PropTypes.object.isRequired,
   match: PropTypes.object.isRequired,
   product: PropTypes.object,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
   err: PropTypes.object
 };
 
 function mapStateToProps({ error, data }) {
   return {
     err: error,
-    product: data && data.product ? data.product : undefined
+    product: data && data.product ? data.product : undefined,
+    isLoading: data && data.isLoading ? data.isLoading : false
   };
 }
 

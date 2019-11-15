@@ -16,15 +16,19 @@ class Category extends Component {
   }
 
   render() {
-    const { history, category } = this.props;
+    const { history, category, isLoading } = this.props;
 
     return (
       <div>
-        <h3>
-            Category:
-          {' '}
-          {category && category.name ? category.name : undefined}
-        </h3>
+        <div className="row">
+          {isLoading ? (
+            <div className="progress">
+              <div className="indeterminate" />
+            </div>
+          ) : undefined}
+        </div>
+
+        <h3>Category: {category && category.name ? category.name : undefined}</h3>
 
         <div className="row">
           {category && category.productsList
@@ -42,13 +46,15 @@ class Category extends Component {
 
 Category.propTypes = {
   history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps({ error, data }) {
   return {
     err: error,
-    category: data && data.category ? data.category : undefined
+    category: data && data.category ? data.category : undefined,
+    isLoading: data && data.isLoading ? data.isLoading : false
   };
 }
 

@@ -14,14 +14,19 @@ class Brand extends Component {
   }
 
   render() {
-    const { history, brand } = this.props;
+    const { history, brand, isLoading } = this.props;
 
     return (
       <div>
-        <h3>
-Brand:
-          {brand && brand.name ? brand.name : undefined}
-        </h3>
+        <div className="row">
+          {isLoading ? (
+            <div className="progress">
+              <div className="indeterminate" />
+            </div>
+          ) : undefined}
+        </div>
+
+        <h3>Brand: {brand && brand.name ? brand.name : undefined}</h3>
 
         <div className="row">
           {brand && brand.productsList
@@ -41,13 +46,15 @@ Brand:
 
 Brand.propTypes = {
   history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps({ error, data }) {
   return {
     err: error,
-    brand: data && data.brand ? data.brand : undefined
+    brand: data && data.brand ? data.brand : undefined,
+    isLoading: data && data.isLoading ? data.isLoading : false
   };
 }
 

@@ -39,7 +39,7 @@ class Latest extends Component {
 
 Latest.propTypes = {
   fetchLatestProducts: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool.isRequired,
   err: PropTypes.object
 };
 
