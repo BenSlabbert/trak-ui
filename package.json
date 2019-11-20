@@ -1,6 +1,6 @@
 {
   "name": "trak-ui",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "private": true,
   "proxy": "https://app.trak-app.co.za",
   "config": {
@@ -11,9 +11,9 @@
     }
   },
   "dependencies": {
-    "google-protobuf": "^3.9.0",
     "axios": "^0.18.0",
     "chart.js": "^1.1.1",
+    "google-protobuf": "^3.9.0",
     "lodash": "^4.17.15",
     "materialize-css": "^1.0.0",
     "moment": "^2.24.0",
