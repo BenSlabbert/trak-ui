@@ -3,6 +3,6 @@ export default [
     name: "search",
     inputType: "text",
     required: false,
-    placeholder: "search"
+    placeholder: "Search for a Product (TV) Brand (Samsung) Category (Computers) or the exact PLID (PLID51982006)"
   }
 ];

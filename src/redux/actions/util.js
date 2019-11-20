@@ -16,7 +16,7 @@ export const dispatchProto = (proto, data, dispatch, type) => {
 
 export const BinaryRequestConfig = {
   responseType: 'blob',
-  timeout: 3000,
+  timeout: 30000,
   maxRedirects: 5,
   headers: {
     Accept: "application/octet-stream"
