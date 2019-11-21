@@ -61,7 +61,7 @@ class AllDeals extends Component {
                       <Link to={`/all-deals/${p.id}`}>{p.name}</Link>
                     </td>
                     <td>
-                      {moment(Number(p.created)).format(
+                      {moment.unix(Number(p.created)).format(
                         "YYYY-MM-DD HH:mm:SS"
                       )}
                     </td>
