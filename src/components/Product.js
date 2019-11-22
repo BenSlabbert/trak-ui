@@ -56,8 +56,8 @@ class Product extends Component {
                     <tr>
                       <td>
                         <Link to={`/brand/${product.product.brand.id}`}>
-                            {product.product.brand.name}
-                          </Link>
+                          {product.product.brand.name}
+                        </Link>
                       </td>
                     </tr>
                   </tbody>
@@ -73,8 +73,8 @@ class Product extends Component {
                     {_.map(product.product.categoriesList, (c) => (
                       <tr key={c.id}>
                         <td key={c.id}>
-                            <Link to={`/category/${c.id}`}>{c.name}</Link>
-                          </td>
+                          <Link to={`/category/${c.id}`}>{c.name}</Link>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -102,25 +102,26 @@ class Product extends Component {
             </div>
 
             <div className="row col s12 m12 l12">
+              {/* todo add an onclick handler to open a modal with a larger graph */}
               <LineChart
                 data={{
-                  labels: product.stats.chart.labelsList.slice(0, 5),
+                  labels: product.stats.chart.labelsList,
                   datasets: _.map(
-                    product.stats.chart.contentList.slice(0, 5),
+                    product.stats.chart.contentList,
                     (l) => ({
                       data: l.contentList,
                       ...l
                     })
                   )
                 }}
-                width="1300"
-                height="300"
+                width="1460"
+                height="500"
               />
             </div>
           </div>
         ) : null}
 
-        <button onClick={() => history.goBack()} className="btn">
+        <button type="button" onClick={() => history.goBack()} className="btn">
             back
         </button>
       </div>
