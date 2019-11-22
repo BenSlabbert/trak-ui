@@ -12,11 +12,11 @@ export default ({ item = null }) => {
             src={item.imageUrl}
             alt="product"
             className="responsive-img hoverable center-block"
-            style={{ width: "50%", height: "50%" }}
+            style={{ width: "75%", height: "75%", maxHeight: "256px" }}
             onClick={() => window.open(item.productUrl, "_blank")}
           />
         </div>
-        <div>
+        <div className="bottom">
           <table className="responsive-table">
             <tbody>
               <tr>

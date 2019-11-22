@@ -10375,9 +10375,9 @@ tr46@^1.0.1:
   dependencies:
     punycode "^2.1.0"
 
-"trak-gRPC@git://github.com/BenSlabbert/trak-gRPC.git#a426e326e3ee88284b8de98f1d6330441fdc142f":
+"trak-gRPC@git://github.com/BenSlabbert/trak-gRPC.git#b42e68c30092f44b14b8e319806f68fbc9f023ef":
   version "1.0.0"
-  resolved "git://github.com/BenSlabbert/trak-gRPC.git#a426e326e3ee88284b8de98f1d6330441fdc142f"
+  resolved "git://github.com/BenSlabbert/trak-gRPC.git#b42e68c30092f44b14b8e319806f68fbc9f023ef"
   dependencies:
     google-protobuf "^3.6.1"
     grpc "^1.17.0"

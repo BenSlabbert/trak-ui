@@ -50,7 +50,8 @@ class AllDeals extends Component {
             <thead>
               <tr>
                 <td>Promotion</td>
-                <td>Created</td>
+                <td>Start</td>
+                <td>End</td>
               </tr>
             </thead>
             <tbody>
@@ -61,7 +62,12 @@ class AllDeals extends Component {
                       <Link to={`/all-deals/${p.id}`}>{p.name}</Link>
                     </td>
                     <td>
-                      {moment.unix(Number(p.created)).format(
+                      {moment.unix(Number(p.start)).format(
+                        "YYYY-MM-DD HH:mm:SS"
+                      )}
+                    </td>
+                    <td>
+                      {moment.unix(Number(p.end)).format(
                         "YYYY-MM-DD HH:mm:SS"
                       )}
                     </td>
