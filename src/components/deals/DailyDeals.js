@@ -10,7 +10,12 @@ const showLatest = (p) => _.map(p, (l) => <LatestItem key={l.productUrl} item={l
 
 class DailyDeals extends Component {
   componentDidMount() {
-    this.props.fetchDailyDeals();
+    const { fetchDailyDeals, pagination } = this.props;
+    if (pagination !== null) {
+      fetchDailyDeals(pagination.pageDailyDeals);
+    } else {
+      fetchDailyDeals();
+    }
   }
 
   render() {
@@ -19,7 +24,7 @@ class DailyDeals extends Component {
     return (
       <div>
         <div className="row">
-          <h5 className="left">Daily Deals</h5>
+          <h5 className="left">{data ? data.promotion.name : "Daily Deals"}</h5>
           {data && data.pageResponse ? <Carousel getPage={fetchDailyDeals} pr={data.pageResponse} /> : undefined}
         </div>
 
@@ -46,8 +51,9 @@ DailyDeals.propTypes = {
   err: PropTypes.object
 };
 
-function mapStateToProps({ error, data }) {
+function mapStateToProps({ error, data, pagination }) {
   return {
+    pagination,
     data: data && data.dailyDeals ? data.dailyDeals : undefined,
     err: error,
     isLoading: data && data.isLoading ? data.isLoading : false

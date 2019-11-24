@@ -1,6 +1,7 @@
 import axios from "axios";
 import pb from "trak-gRPC/gen/js/proto/gateway/gateway_api_pb";
 import { apiActionExceptionHandler } from "../../../util/apiActionExceptionHandler";
+import { pageAllDeals, pageDailyDeals } from "../pagination/paginationActions";
 import { clearAllErrors } from "../error/errorActions";
 import {
   DATA_ADD_PRODUCT,
@@ -98,6 +99,7 @@ export const fetchDailyDeals = (page = 1) => async (dispatch) => {
   });
 
   try {
+    dispatch(pageDailyDeals(page));
     const res = await axios.get(`/api/daily-deals?page=${page}`, BinaryRequestConfig);
     dispatchProto(pb.PromotionResponse, res.data, dispatch, DATA_FETCH_DAILY_DEALS);
   } catch (e) {
@@ -115,6 +117,7 @@ export const fetchAllDeals = (page = 1) => async (dispatch) => {
 
   try {
     const res = await axios.get(`/api/all-promotions?page=${page}`, BinaryRequestConfig);
+    dispatch(pageAllDeals(page));
     dispatchProto(pb.GetAllPromotionsResponse, res.data, dispatch, DATA_FETCH_ALL_DEALS);
   } catch (e) {
     dispatch(dataLoadingStop());

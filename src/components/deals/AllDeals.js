@@ -9,9 +9,14 @@ import * as actions from "../../redux/actions";
 
 class AllDeals extends Component {
   componentDidMount() {
-    const { clearAllErrors, fetchAllDeals } = this.props;
+    const { clearAllErrors, fetchAllDeals, pagination } = this.props;
     clearAllErrors();
-    fetchAllDeals();
+
+    if (pagination !== null) {
+      fetchAllDeals(pagination.pageAllDeals);
+    } else {
+      fetchAllDeals();
+    }
   }
 
   componentWillUnmount() {
@@ -96,8 +101,9 @@ AllDeals.defaultProps = {
   err: null
 };
 
-function mapStateToProps({ error, data }) {
+function mapStateToProps({ error, data, pagination }) {
   return {
+    pagination,
     data: data && data.allDeals ? data.allDeals : undefined,
     err: error,
     isLoading: data && data.isLoading ? data.isLoading : false

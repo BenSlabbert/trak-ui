@@ -1,8 +1,8 @@
 {
   "name": "trak-ui",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "private": true,
-  "proxy": "https://app.trak-app.co.za",
+  "proxy": "http://localhost:5000",
   "config": {
     "husky": {
       "hooks": {
@@ -30,7 +30,7 @@
     "redux": "^4.0.1",
     "redux-form": "^8.2.0",
     "redux-thunk": "^2.2.0",
-    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC.git#b42e68c30092f44b14b8e319806f68fbc9f023ef"
+    "trak-gRPC": "git://github.com/BenSlabbert/trak-gRPC.git#ec04c2353686077be4f0335e4ec5320317689d47"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src/styles/ --include-path ./node_modules src/styles/ -o src/styles/",

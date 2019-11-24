@@ -42,7 +42,7 @@ class Deal extends Component {
     return (
       <div>
         <div className="row">
-          <h5 className="left">Deal</h5>
+          <h5 className="left">{deal ? deal.promotion.name : "Deal"}</h5>
           {!(deal && deal.pageResponse) ? undefined : (
             <Carousel
               getPage={fetchDeal}
